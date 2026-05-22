@@ -4,7 +4,7 @@ import { PremiumCarousel } from './components/PremiumCarousel';
 import { FloatingIceCreamIcon } from './components/FloatingIceCreamIcon';
 import { ScrollToTop } from './components/ScrollToTop';
 import { ImageWithFallback } from './components/figma/ImageWithFallback';
-import { IceCream, Cake, Candy, Sparkles, MapPin, Phone, Mail, Instagram, Facebook, Twitter, Award, Users, Heart, Clock } from 'lucide-react';
+import { IceCream, Cake, Candy, Sparkles, MapPin, Phone, Mail, Instagram, Facebook, Twitter, Award, Users, Heart, Clock, Check, Lightbulb, BadgeCheck, Image } from 'lucide-react';
 import { motion } from 'motion/react';
 // @ts-ignore
 import '../styles/globals.css';
@@ -39,20 +39,19 @@ export default function App() {
               className="inline-flex items-center gap-2 bg-white/80 backdrop-blur-md rounded-full px-5 py-2.5 shadow-lg shadow-pink-100/50 mb-6"
             >
               <Sparkles className="text-pink-300" size={18} />
-              <span className="text-sm font-semibold text-gray-700">Authentic Italian Gelato</span>
+              <span className="text-sm font-semibold text-gray-700">Hapiness in every scoop!!!</span>
             </motion.div>
 
             <h1 className="text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-extrabold mb-6 lg:mb-8 leading-[1.1] tracking-tight">
-              Taste the
+              Let's Go
               <br />
               <span className="bg-gradient-to-r from-pink-reguler via-purple-reguler to-blue-reguler bg-clip-text text-transparent">
-                Italian Dream
+                Gelato!
               </span>
             </h1>
 
             <p className="text-lg lg:text-xl text-gray-600 mb-8 lg:mb-10 leading-relaxed max-w-xl mx-auto lg:mx-0">
-              Handcrafted gelato made with love, using the finest ingredients from Italy.
-              Every scoop is a journey to the streets of Rome.
+              Scoop up happiness with every bite of our Gelato crafted with love and the finest ingredients.authentic flavors that will have you smiling from the first spoonful to the last. It's all about fun, flavor, and indulging in a little cup of joy!
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
@@ -61,7 +60,7 @@ export default function App() {
                 whileTap={{ scale: 0.95 }}
                 className="bg-gradient-to-r from-pink-reguler via-purple-200 to-pink-reguler bg-[length:200%_100%] hover:bg-right text-gray-700 px-8 lg:px-10 py-4 lg:py-5 rounded-full text-base lg:text-lg font-bold shadow-2xl shadow-pink-200/50 hover:shadow-pink-300/60 transition-all duration-500"
               >
-                Explore Flavors
+                Our Products
               </motion.button>
               <motion.button
                 whileHover={{ scale: 1.05, y: -2 }}
@@ -80,9 +79,9 @@ export default function App() {
               className="grid grid-cols-3 gap-6 mt-12 lg:mt-16"
             >
               {[
-                { icon: Award, label: '15+ Awards' },
-                { icon: Users, label: '50k+ Customers' },
-                { icon: Heart, label: '100% Natural' },
+                { icon: Check, label: 'Halal Certified' },
+                { icon: Lightbulb, label: 'Local Unique Flavors' },
+                { icon: BadgeCheck, label: 'High Quality Local Ingredients' },
               ].map((stat, idx) => (
                 <div key={idx} className="text-center lg:text-left">
                   <div className="inline-flex items-center justify-center w-12 h-12 rounded-2xl bg-gradient-to-br from-pink-reguler to-purple-200 mb-2 shadow-lg">
@@ -123,7 +122,7 @@ export default function App() {
                   <Sparkles className="text-pink-400" size={28} />
                 </div>
                 <div>
-                  <p className="font-extrabold text-lg text-gray-800">100% Natural</p>
+                  <p className="font-extrabold text-lg text-gray-800">High Quality</p>
                   <p className="text-gray-600 text-sm">Ingredients</p>
                 </div>
               </div>
@@ -162,20 +161,20 @@ export default function App() {
             transition={{ duration: 0.6 }}
             className="text-center mb-16 lg:mb-20"
           >
-            <span className="inline-block text-sm font-bold text-pink-300 tracking-wider uppercase mb-4">Our Collections</span>
-            <h2 className="text-4xl lg:text-6xl font-extrabold mb-5 text-gray-800">Premium Selection</h2>
+            <span className="inline-block text-sm font-bold text-pink-300 tracking-wider uppercase mb-4">Premium Selection</span>
+            <h2 className="text-4xl lg:text-6xl font-extrabold mb-5 text-gray-800">OUR PRODUCTS</h2>
             <p className="text-lg lg:text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed">
-              Discover our premium selection of Italian desserts crafted with passion
+              Discover our premium selection of desserts crafted with passion
             </p>
           </motion.div>
 
           {/* Category Cards */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-6 lg:gap-6">
             {[
               {
                 icon: IceCream,
                 title: 'Gelato',
-                description: '30+ artisan flavors',
+                description: 'Scoop up happiness with every bite of our Gelato Cups, made with the freshest milk for that irresistibly smooth and creamy texture. Packed with natural ingredients, each cup is bursting with pure, authentic flavors that will have you smiling from the first spoonful to the last.',
                 image: 'https://images.unsplash.com/photo-1759314420838-36d3d881c81c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=600',
                 gradient: 'from-pink-reguler via-purple-reguler to-rose-200',
                 shadowColor: 'shadow-pink-200/50',
@@ -183,27 +182,20 @@ export default function App() {
               {
                 icon: Cake,
                 title: 'Pastry',
-                description: 'Fresh daily creations',
+                description: 'Get ready for a bite of pure happiness with our delicious mix of cookies, croissants, and other delightful pastries! From the buttery, flaky goodness of our croissants to the sweet crunch of our cookies, every bite is a celebration of flavor. Perfect for sharing (or keeping all to yourself).',
                 image: 'https://images.unsplash.com/photo-1769812343875-c40f9ec7f846?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=600',
                 gradient: 'from-purple-reguler via-purple-reguler to-violet-300',
                 shadowColor: 'shadow-purple-200/50',
               },
               {
                 icon: Candy,
-                title: 'Chocolate',
-                description: 'Belgian & Italian blend',
+                title: 'Dubai Chocolate',
+                description: 'Indulge in the irresistible allure of our Dubai Chocolate, where every bite is a journey to pure bliss. Crafted with the finest cocoa and infused with exotic flavors, it’s a decadent treat that will transport your taste buds to chocolate paradise.',
                 image: 'https://images.unsplash.com/photo-1772985809496-e2f12a22b1b1?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=600',
                 gradient: 'from-amber-200 via-orange-200 to-yellow-300',
                 shadowColor: 'shadow-amber-200/50',
               },
-              {
-                icon: Sparkles,
-                title: 'Sorbet',
-                description: 'Refreshing & fruity',
-                image: 'https://images.unsplash.com/photo-1532678465554-94846274c297?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=600',
-                gradient: 'from-cyan-200 via-blue-200 to-indigo-300',
-                shadowColor: 'shadow-blue-200/50',
-              },
+              
             ].map((category, idx) => (
               <motion.div
                 key={category.title}
@@ -257,7 +249,7 @@ export default function App() {
             className="text-center mb-16 lg:mb-20"
           >
             <span className="inline-block text-sm font-bold text-purple-300 tracking-wider uppercase mb-4">Fan Favorites</span>
-            <h2 className="text-4xl lg:text-6xl font-extrabold mb-5 text-gray-800">Best Sellers</h2>
+            <h2 className="text-4xl lg:text-6xl font-extrabold mb-5 text-gray-800">What's Your Favorite?</h2>
             <p className="text-lg lg:text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed">
               Our most loved flavors by gelato enthusiasts worldwide
             </p>
@@ -302,28 +294,33 @@ export default function App() {
             >
               <span className="inline-block text-sm font-bold text-pink-300 tracking-wider uppercase mb-4">Our Heritage</span>
               <h2 className="text-4xl lg:text-6xl font-extrabold mb-6 lg:mb-8 text-gray-800 leading-tight">
-                Crafted with
+                About
                 <br />
                 <span className="bg-gradient-to-r from-blue-reguler via-purple-reguler to-pink-reguler bg-clip-text text-transparent">
-                  Passion & Tradition
+                  Let's go Gelato
                 </span>
               </h2>
 
               <div className="space-y-5 mb-10">
                 <p className="text-gray-700 text-base lg:text-lg leading-relaxed">
-                  Born in the heart of Sicily, <span className="font-bold text-pink-300">Dolce Vita</span> brings
-                  authentic Italian gelato to your neighborhood. Our master gelato makers trained in the
-                  historic gelaterias of Rome and Florence, bringing decades of tradition to every scoop.
+                  <span className="font-bold text-pink-300">Let’s Go Gelato</span> is a well-established chain with 18 stores, operating since 2016 and serving regions from North Sumatra to East Java, Indonesia.
                 </p>
                 <p className="text-gray-700 text-base lg:text-lg leading-relaxed">
-                  We believe in simplicity and quality. Every morning, we handcraft our gelato using
-                  traditional methods and the finest ingredients sourced from local farms and Italian importers.
-                  No artificial flavors, no shortcuts—just pure, creamy perfection.
+                  Targeting the family market, we provide Gelato, sorbets, Pastry. Our products are crafted from locally sourced, high-quality ingredients, featuring low fat and low sugar content, while being rich in fiber and protein.
                 </p>
               </div>
 
+              {/* button */}
+              <motion.button
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                  className={`w-full from-blue-reguler via-purple-reguler to-pink-reguler bg-gradient-to-r text-gray-700 py-4 rounded-2xl font-bold shadow-lg hover:shadow-xl transition-all duration-300 text-sm lg:text-base`}
+                >
+                  Learn More
+                </motion.button>
+
               {/* Stats Grid */}
-              <div className="grid grid-cols-3 gap-6 lg:gap-8">
+              {/* <div className="grid grid-cols-3 gap-6 lg:gap-8">
                 {[
                   { number: '15+', label: 'Years', sublabel: 'Experience' },
                   { number: '50k+', label: 'Happy', sublabel: 'Customers' },
@@ -344,7 +341,7 @@ export default function App() {
                     <p className="text-gray-500 text-xs">{stat.sublabel}</p>
                   </motion.div>
                 ))}
-              </div>
+              </div> */}
             </motion.div>
           </div>
         </div>
@@ -363,70 +360,72 @@ export default function App() {
             <span className="inline-block text-sm font-bold text-pink-300 tracking-wider uppercase mb-4">Find Us</span>
             <h2 className="text-4xl lg:text-6xl font-extrabold mb-5 text-gray-800">Visit Our Stores</h2>
             <p className="text-lg lg:text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed">
-              Experience authentic Italian gelato at our beautiful locations
+              Experience delicious gelato at our beautiful locations
             </p>
           </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
             {[
               {
-                city: 'Downtown',
-                address: '123 Main Street, City Center',
+                city: 'TSM Cibubur',
+                address: 'Jl. Alternatif Cibubur No.230 A Lantai LG, Harjamukti, Cimanggis, Depok City, West Java 16454',
                 hours: 'Mon-Sun: 10:00 AM - 10:00 PM',
-                phone: '+1 (555) 123-4567',
+                
+                image: 'https://images.unsplash.com/photo-1680438004156-51a1839bd14c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=600',
                 gradient: 'from-pink-reguler via-blue-reguler to-blue-300',
               },
               {
-                city: 'Riverside',
-                address: '456 River Road, Riverside District',
+                city: 'Bengawan | Bandung',
+                address: 'Jl Bengawan No 29, Kota Bandung, Jawa Barat',
                 hours: 'Mon-Sun: 11:00 AM - 11:00 PM',
-                phone: '+1 (555) 234-5678',
+                
+                image: 'https://images.unsplash.com/photo-1680438004156-51a1839bd14c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=600',
                 gradient: 'from-purple-reguler via-pink-reguler to-pink-300',
               },
               {
-                city: 'Uptown',
-                address: '789 Park Avenue, Uptown Plaza',
+                city: 'Villagio | Karawang',
+                address: 'Jl. Bulevar Summarecon Emerald Blk. A No.Kav.1, Kondangjaya, Kec. Karawang Tim., Karawang, Jawa Barat 41371',
                 hours: 'Mon-Sun: 9:00 AM - 9:00 PM',
-                phone: '+1 (555) 345-6789',
+                
+                image: 'https://images.unsplash.com/photo-1680438004156-51a1839bd14c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=600',
                 gradient: 'from-blue-reguler via-purple-reguler to-purple-300',
               },
             ].map((location, idx) => (
-              <motion.div
-                key={location.city}
-                initial={{ opacity: 0, y: 50 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: idx * 0.1 }}
-                whileHover={{ y: -8 }}
-                className="group bg-white/80 backdrop-blur-sm rounded-[2rem] p-8 lg:p-10 shadow-xl hover:shadow-2xl transition-all duration-500 relative overflow-hidden"
-              >
-                {/* Icon */}
-                <div className={`inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br ${location.gradient} mb-6 shadow-xl`}>
-                  <MapPin className="text-gray-600" size={32} />
-                </div>
-
-                <h3 className="text-2xl lg:text-3xl font-extrabold mb-5 text-gray-800">{location.city}</h3>
-
-                <div className="space-y-4 text-gray-600 mb-8">
-                  <p className="text-sm lg:text-base leading-relaxed">{location.address}</p>
-                  <p className="font-bold text-gray-700 text-sm lg:text-base">{location.hours}</p>
-                  <div className="flex items-center gap-3">
-                    <Phone size={18} className="text-pink-300" />
-                    <span className="text-sm lg:text-base">{location.phone}</span>
-                  </div>
-                </div>
-
-                <motion.button
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
-                  className={`w-full bg-gradient-to-r ${location.gradient} text-gray-700 py-4 rounded-2xl font-bold shadow-lg hover:shadow-xl transition-all duration-300 text-sm lg:text-base`}
+              <div className='h-full rounded-[2rem] overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-500 relative group' key={location.city}>
+                <ImageWithFallback src={location.image} alt={location.city} className="w-full h-70 object-cover group-hover:scale-110 transition-transform duration-700" />
+                <motion.div
+                  key={location.city}
+                  initial={{ opacity: 0, y: 50 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: idx * 0.1 }}
+                  whileHover={{ y: -8 }}
+                  className="group bg-white/80 backdrop-blur-sm rounded-[2rem] h-[450px] item-center p-8 lg:p-10 shadow-xl hover:shadow-2xl transition-all duration-500 relative overflow-hidden"
                 >
-                  Get Directions
-                </motion.button>
+                  {/* Icon */}
+                  <div className={`inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br ${location.gradient} mb-6 shadow-xl`}>
+                    <MapPin className="text-gray-600" size={32} />
+                  </div>
 
-                {/* Decorative blob */}
-                <div className={`absolute -bottom-16 -right-16 w-48 h-48 bg-gradient-to-br ${location.gradient} rounded-full blur-3xl opacity-10 group-hover:opacity-20 transition-opacity duration-500`} />
-              </motion.div>
+                  <h3 className="text-2xl lg:text-3xl font-extrabold mb-5 text-gray-800">{location.city}</h3>
+
+                  <div className="space-y-4 text-gray-600 mb-8">
+                    <p className="text-sm lg:text-base leading-relaxed">{location.address}</p>
+                    <p className="font-bold text-gray-700 text-sm lg:text-base">{location.hours}</p>
+                  </div>
+
+                  <motion.button
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                    className={`w-full bg-gradient-to-r ${location.gradient} text-gray-700 py-4 rounded-2xl font-bold shadow-lg hover:shadow-xl transition-all duration-300 text-sm lg:text-base`}
+                  >
+                    Get Directions
+                  </motion.button>
+
+                  {/* Decorative blob */}
+                  <div className={`absolute -bottom-16 -right-16 w-48 h-48 bg-gradient-to-br ${location.gradient} rounded-full blur-3xl opacity-10 group-hover:opacity-20 transition-opacity duration-500`} />
+                </motion.div>
+              </div>
             ))}
           </div>
         </div>
@@ -451,7 +450,7 @@ export default function App() {
                 </h3>
               </div>
               <p className="text-gray-400 mb-6 leading-relaxed">
-                Bringing authentic Italian gelato to your neighborhood since 2009.
+                Let’s Go Gelato is a well-established chain with 18 stores, operating since 2016 and serving regions from North Sumatra to East Java, Indonesia.
               </p>
               <div className="flex gap-3">
                 {[Instagram, Facebook, Twitter].map((Icon, idx) => (
@@ -523,7 +522,7 @@ export default function App() {
           {/* Bottom Bar */}
           <div className="border-t border-white/10 pt-8 text-center">
             <p className="text-gray-400 text-sm">
-              © 2026 Dolce Vita Gelateria. All rights reserved. Made with{' '}
+              © 2026 Let's GO Gelato. All rights reserved. Made with{' '}
               <span className="text-pink-300">❤</span> and gelato.
             </p>
           </div>

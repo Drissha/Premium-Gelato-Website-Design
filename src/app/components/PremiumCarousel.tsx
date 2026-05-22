@@ -2,61 +2,63 @@ import { useState, useEffect } from 'react';
 import { ChevronLeft, ChevronRight, Star, Plus } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { ImageWithFallback } from './figma/ImageWithFallback';
+// @ts-ignore
+import '../../styles/globals.css';
 
 const bestSellers = [
   {
     id: 1,
-    name: 'Pistachio Siciliano',
-    description: 'Premium Sicilian pistachios with a touch of honey',
+    name: 'BlackForest',
+    description: 'Chocolate, cherries, and cream-rich, indulgent and classic',
     image: 'https://images.unsplash.com/photo-1571990925439-2b6072445908?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=800',
     rating: 4.9,
     price: '$7.50',
-    color: 'from-green-200 to-emerald-300',
+    color: 'from-pink-reguler via-purple-reguler to-purple-reguler',
   },
   {
     id: 2,
-    name: 'Fragola Fresca',
-    description: 'Fresh strawberries with vanilla bean swirls',
+    name: 'Blueberry Cheesecake',
+    description: 'Tangy blueberry swirl with creamy cheesecake twist',
     image: 'https://images.unsplash.com/photo-1602532769069-0e856a643e7d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=800',
     rating: 5.0,
     price: '$6.50',
-    color: 'from-pink-reguler to-rose-300',
+    color: 'from-purple-reguler via-purple-reguler to-pink-reguler',
   },
   {
     id: 3,
-    name: 'Cioccolato Noir',
-    description: 'Rich Belgian dark chocolate blend',
+    name: 'Bublegum',
+    description: 'Sweet, fun, and nostalgic-just like your favorite childhood treat',
     image: 'https://images.unsplash.com/photo-1588685232180-8bb64cb4837a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=800',
     rating: 4.8,
     price: '$6.50',
-    color: 'from-amber-200 to-orange-300',
+    color: 'from-pink-reguler via-pink-reguler to-orange-200',
   },
   {
     id: 4,
-    name: 'Limone Sorbet',
-    description: 'Zesty Amalfi lemons with fresh mint',
+    name: 'Choco Chashew',
+    description: 'Creamy chocolate gelato with crunchy cashew bits for extra indulgence',
     image: 'https://images.unsplash.com/photo-1689001896226-4bacda02550d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=800',
     rating: 4.7,
     price: '$5.50',
-    color: 'from-yellow-200 to-amber-300',
+    color: 'from-yellow-200 via-yellow-200 to-pink-reguler',
   },
   {
     id: 5,
-    name: 'Mango Passione',
-    description: 'Tropical mango with passion fruit ripple',
+    name: 'Choco Sorbet',
+    description: 'A refreshing, dairy-free chocolate expreience-rich and smooth',
     image: 'https://images.unsplash.com/photo-1587372681603-5b99f6e49cf9?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=800',
     rating: 4.9,
     price: '$6.50',
-    color: 'from-orange-200 to-yellow-300',
+    color: 'from-pink-reguler via-pink-reguler to-purple-reguler',
   },
   {
     id: 6,
-    name: 'Vaniglia Classica',
-    description: 'Madagascar vanilla bean with caramel notes',
+    name: 'Coffee Nut',
+    description: 'Bold Coffee flavor paired with a nutty crunch in every scoop',
     image: 'https://images.unsplash.com/photo-1587653950445-77907aa6bdd7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=800',
     rating: 4.6,
     price: '$6.00',
-    color: 'from-amber-200 to-yellow-200',
+    color: 'from-purple-reguler via-purple-reguler to-pink-reguler',
   },
 ];
 
