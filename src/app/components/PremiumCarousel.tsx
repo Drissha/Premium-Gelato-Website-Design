@@ -1,65 +1,75 @@
-import { useState, useEffect } from 'react';
-import { ChevronLeft, ChevronRight, Star, Plus } from 'lucide-react';
-import { motion, AnimatePresence } from 'motion/react';
-import { ImageWithFallback } from './figma/ImageWithFallback';
-import { Blackforest, Blueberry, Bublegum, ChocoChashew, ChocoSorbet, CoffeeNut  } from '../imageImports';
+import { useState, useEffect } from "react";
+import { ChevronLeft, ChevronRight, Star, Plus } from "lucide-react";
+import { motion, AnimatePresence } from "motion/react";
+import { ImageWithFallback } from "./figma/ImageWithFallback";
+import {
+  Blackforest,
+  Blueberry,
+  Bublegum,
+  ChocoChashew,
+  ChocoSorbet,
+  CoffeeNut,
+} from "../imageImports";
 // @ts-ignore
-import '../../styles/globals.css';
+import "../../styles/globals.css";
 
 const bestSellers = [
   {
     id: 1,
-    name: 'BlackForest',
-    description: 'Chocolate, cherries, and cream-rich, indulgent and classic',
+    name: "BlackForest",
+    description: "Chocolate, cherries, and cream-rich, indulgent and classic",
     image: Blackforest,
     rating: 4.9,
-    price: '$7.50',
-    color: 'from-pink-reguler via-purple-reguler to-purple-reguler',
+    price: "$7.50",
+    color: "from-pink-reguler via-purple-reguler to-purple-reguler",
   },
   {
     id: 2,
-    name: 'Blueberry Cheesecake',
-    description: 'Tangy blueberry swirl with creamy cheesecake twist',
+    name: "Blueberry Cheesecake",
+    description: "Tangy blueberry swirl with creamy cheesecake twist",
     image: Blueberry,
     rating: 5.0,
-    price: '$6.50',
-    color: 'from-purple-reguler via-purple-reguler to-pink-reguler',
+    price: "$6.50",
+    color: "from-purple-reguler via-purple-reguler to-pink-reguler",
   },
   {
     id: 3,
-    name: 'Bublegum',
-    description: 'Sweet, fun, and nostalgic-just like your favorite childhood treat',
+    name: "Bublegum",
+    description:
+      "Sweet, fun, and nostalgic-just like your favorite childhood treat",
     image: Bublegum,
     rating: 4.8,
-    price: '$6.50',
-    color: 'from-pink-reguler via-pink-reguler to-orange-200',
+    price: "$6.50",
+    color: "from-pink-reguler via-pink-reguler to-orange-200",
   },
   {
     id: 4,
-    name: 'Choco Chashew',
-    description: 'Creamy chocolate gelato with crunchy cashew bits for extra indulgence',
+    name: "Choco Chashew",
+    description:
+      "Creamy chocolate gelato with crunchy cashew bits for extra indulgence",
     image: ChocoChashew,
     rating: 4.7,
-    price: '$5.50',
-    color: 'from-yellow-200 via-yellow-200 to-pink-reguler',
+    price: "$5.50",
+    color: "from-yellow-200 via-yellow-200 to-pink-reguler",
   },
   {
     id: 5,
-    name: 'Choco Sorbet',
-    description: 'A refreshing, dairy-free chocolate expreience-rich and smooth',
+    name: "Choco Sorbet",
+    description:
+      "A refreshing, dairy-free chocolate expreience-rich and smooth",
     image: ChocoSorbet,
     rating: 4.9,
-    price: '$6.50',
-    color: 'from-pink-reguler via-pink-reguler to-purple-reguler',
+    price: "$6.50",
+    color: "from-pink-reguler via-pink-reguler to-purple-reguler",
   },
   {
     id: 6,
-    name: 'Coffee Nut',
-    description: 'Bold Coffee flavor paired with a nutty crunch in every scoop',
+    name: "Coffee Nut",
+    description: "Bold Coffee flavor paired with a nutty crunch in every scoop",
     image: CoffeeNut,
     rating: 4.6,
-    price: '$6.00',
-    color: 'from-purple-reguler via-purple-reguler to-pink-reguler',
+    price: "$6.00",
+    color: "from-purple-reguler via-purple-reguler to-pink-reguler",
   },
 ];
 
@@ -116,10 +126,10 @@ export function PremiumCarousel() {
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: idx * 0.1, duration: 0.5 }}
-            className="group relative rounded-[2rem] overflow-hidden transition-all duration-500 hover:-translate-y-3"
+            className="group relative rounded-[2rem] items-center overflow-hidden transition-all duration-500 hover:-translate-y-3"
           >
             {/* Image Container */}
-            <div className="relative aspect-[4/5]">
+            <div className="relative aspect-[4/5] items-center md:h-[60%] sm:h-[30%] w-full overflow-hidden">
               <ImageWithFallback
                 src={item.image}
                 alt={item.name}
@@ -148,8 +158,10 @@ export function PremiumCarousel() {
                 {item.description}
               </p>
 
-              <div className="flex items-center justify-between">
-                <span className={`text-3xl font-extrabold bg-gradient-to-r ${item.color} bg-clip-text text-transparent`}>
+              {/* <div className="flex items-center justify-between">
+                <span
+                  className={`text-3xl font-extrabold bg-gradient-to-r ${item.color} bg-clip-text text-transparent`}
+                >
                   {item.price}
                 </span>
                 <motion.button
@@ -159,24 +171,29 @@ export function PremiumCarousel() {
                 >
                   <Plus size={22} strokeWidth={3} />
                 </motion.button>
-              </div>
+              </div> */}
             </div>
 
             {/* Decorative element */}
-            <div className={`absolute -bottom-10 -right-10 w-32 h-32 bg-gradient-to-br ${item.color} rounded-full blur-3xl opacity-20 group-hover:opacity-30 transition-opacity duration-500`} />
+            <div
+              className={`absolute -bottom-10 -right-10 w-32 h-32 bg-gradient-to-br ${item.color} rounded-full blur-3xl opacity-20 group-hover:opacity-30 transition-opacity duration-500`}
+            />
           </motion.div>
         ))}
       </div>
 
       {/* Navigation Controls */}
-      <div className="flex justify-center items-center gap-6 mt-12">
+      <div className="flex justify-center items-center gap-6 mt-6">
         <motion.button
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.9 }}
           onClick={() => paginate(-1)}
           className="bg-white rounded-2xl p-4 shadow-xl shadow-gray-200/50 hover:shadow-2xl hover:shadow-pink-200/50 transition-all duration-300 group"
         >
-          <ChevronLeft size={24} className="text-gray-700 group-hover:text-pink-300 transition-colors" />
+          <ChevronLeft
+            size={24}
+            className="text-gray-700 group-hover:text-pink-300 transition-colors"
+          />
         </motion.button>
 
         {/* Dots Indicator */}
@@ -193,8 +210,8 @@ export function PremiumCarousel() {
               <div
                 className={`h-2.5 rounded-full transition-all duration-300 ${
                   idx === currentIndex
-                    ? 'w-10 bg-gradient-to-r from-pink-reguler to-purple-200'
-                    : 'w-2.5 bg-gray-300 group-hover:bg-pink-200'
+                    ? "w-10 bg-gradient-to-r from-pink-reguler to-purple-200"
+                    : "w-2.5 bg-gray-300 group-hover:bg-pink-200"
                 }`}
               />
             </button>
@@ -207,7 +224,10 @@ export function PremiumCarousel() {
           onClick={() => paginate(1)}
           className="bg-white rounded-2xl p-4 shadow-xl shadow-gray-200/50 hover:shadow-2xl hover:shadow-pink-200/50 transition-all duration-300 group"
         >
-          <ChevronRight size={24} className="text-gray-700 group-hover:text-pink-300 transition-colors" />
+          <ChevronRight
+            size={24}
+            className="text-gray-700 group-hover:text-pink-300 transition-colors"
+          />
         </motion.button>
       </div>
     </div>

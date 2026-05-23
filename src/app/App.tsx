@@ -1,14 +1,33 @@
-import { GelatoNavbar } from './components/GelatoNavbar';
-import { FloatingGelatoShapes } from './components/FloatingGelatoShapes';
-import { PremiumCarousel } from './components/PremiumCarousel';
-import { FloatingIceCreamIcon } from './components/FloatingIceCreamIcon';
-import { ScrollToTop } from './components/ScrollToTop';
-import { ImageWithFallback } from './components/figma/ImageWithFallback';
-import { IceCream, Cake, Candy, Sparkles, MapPin, Phone, Mail, Instagram, Facebook, Twitter, Award, Users, Heart, Clock, Check, Lightbulb, BadgeCheck, Image } from 'lucide-react';
-import { motion } from 'motion/react';
-import { Hero, Gelato, Cookies, Choco } from './imageImports';
+import { GelatoNavbar } from "./components/GelatoNavbar";
+import { FloatingGelatoShapes } from "./components/FloatingGelatoShapes";
+import { PremiumCarousel } from "./components/PremiumCarousel";
+import { FloatingIceCreamIcon } from "./components/FloatingIceCreamIcon";
+import { ScrollToTop } from "./components/ScrollToTop";
+import { ImageWithFallback } from "./components/figma/ImageWithFallback";
+import {
+  IceCream,
+  Cake,
+  Candy,
+  Sparkles,
+  MapPin,
+  Phone,
+  Mail,
+  Instagram,
+  Facebook,
+  Twitter,
+  Award,
+  Users,
+  Heart,
+  Clock,
+  Check,
+  Lightbulb,
+  BadgeCheck,
+  Image,
+} from "lucide-react";
+import { motion } from "motion/react";
+import { Hero, Gelato, Cookies, Choco } from "./imageImports";
 // @ts-ignore
-import '../styles/globals.css';
+import "../styles/globals.css";
 
 export default function App() {
   return (
@@ -17,13 +36,25 @@ export default function App() {
       <ScrollToTop />
 
       {/* Hero Section */}
-      <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden pt-24 pb-20">
+      <section
+        id="home"
+        className="relative min-h-screen flex items-center justify-center overflow-hidden pt-24 pb-20"
+      >
         <FloatingGelatoShapes />
 
         {/* Floating Ice Cream Illustrations */}
-        <FloatingIceCreamIcon delay={0.5} className="absolute top-32 right-12 hidden lg:block opacity-20 hover:opacity-40 transition-opacity" />
-        <FloatingIceCreamIcon delay={0.8} className="absolute bottom-32 left-16 hidden lg:block opacity-15 hover:opacity-30 transition-opacity scale-75" />
-        <FloatingIceCreamIcon delay={1.1} className="absolute top-1/2 right-1/4 hidden xl:block opacity-10 hover:opacity-25 transition-opacity scale-50" />
+        <FloatingIceCreamIcon
+          delay={0.5}
+          className="absolute top-32 right-12 hidden lg:block opacity-20 hover:opacity-40 transition-opacity"
+        />
+        <FloatingIceCreamIcon
+          delay={0.8}
+          className="absolute bottom-32 left-16 hidden lg:block opacity-15 hover:opacity-30 transition-opacity scale-75"
+        />
+        <FloatingIceCreamIcon
+          delay={1.1}
+          className="absolute top-1/2 right-1/4 hidden xl:block opacity-10 hover:opacity-25 transition-opacity scale-50"
+        />
 
         <div className="max-w-7xl mx-auto px-6 lg:px-8 py-12 lg:py-20 grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center z-10">
           {/* Left Content */}
@@ -40,26 +71,31 @@ export default function App() {
               className="inline-flex items-center gap-2 bg-white/80 backdrop-blur-md rounded-full px-5 py-2.5 shadow-lg shadow-pink-100/50 mb-6"
             >
               <Sparkles className="text-pink-300" size={18} />
-              <span className="text-sm font-semibold text-gray-700">Hapiness in every scoop!!!</span>
+              <span className="text-sm font-semibold text-gray-700">
+                Hapiness in every scoop!!!
+              </span>
             </motion.div>
 
             <h1 className="text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-extrabold mb-6 lg:mb-8 leading-[1.1] tracking-tight">
               Let's Go
               <br />
-              <span className="bg-gradient-to-r from-pink-reguler via-purple-reguler to-blue-reguler bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-blue-reguler via-purple-reguler to-purple-reguler bg-clip-text text-transparent">
                 Gelato!
               </span>
             </h1>
 
             <p className="text-lg lg:text-xl text-gray-600 mb-8 lg:mb-10 leading-relaxed max-w-xl mx-auto lg:mx-0">
-              Scoop up happiness with every bite of our Gelato crafted with love and the finest ingredients.authentic flavors that will have you smiling from the first spoonful to the last. It's all about fun, flavor, and indulging in a little cup of joy!
+              Scoop up happiness with every bite of our Gelato crafted with love
+              and the finest ingredients.authentic flavors that will have you
+              smiling from the first spoonful to the last. It's all about fun,
+              flavor, and indulging in a little cup of joy!
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
               <motion.button
                 whileHover={{ scale: 1.05, y: -2 }}
                 whileTap={{ scale: 0.95 }}
-                className="bg-gradient-to-r from-pink-reguler via-purple-200 to-pink-reguler bg-[length:200%_100%] hover:bg-right text-gray-700 px-8 lg:px-10 py-4 lg:py-5 rounded-full text-base lg:text-lg font-bold shadow-2xl shadow-pink-200/50 hover:shadow-pink-300/60 transition-all duration-500"
+                className="bg-gradient-to-r from-blue-reguler via-purple-200 to-pink-reguler bg-[length:200%_100%] hover:bg-right text-gray-700 px-8 lg:px-10 py-4 lg:py-5 rounded-full text-base lg:text-lg font-bold shadow-2xl shadow-pink-200/50 hover:shadow-pink-300/60 transition-all duration-500"
               >
                 Our Products
               </motion.button>
@@ -80,15 +116,17 @@ export default function App() {
               className="grid grid-cols-3 gap-6 mt-12 lg:mt-16"
             >
               {[
-                { icon: Check, label: 'Halal Certified' },
-                { icon: Lightbulb, label: 'Local Unique Flavors' },
-                { icon: BadgeCheck, label: 'High Quality Local Ingredients' },
+                { icon: Check, label: "Halal Certified" },
+                { icon: Lightbulb, label: "Local Unique Flavors" },
+                { icon: BadgeCheck, label: "High Quality Local Ingredients" },
               ].map((stat, idx) => (
                 <div key={idx} className="text-center lg:text-left">
                   <div className="inline-flex items-center justify-center w-12 h-12 rounded-2xl bg-gradient-to-br from-pink-reguler to-purple-200 mb-2 shadow-lg">
                     <stat.icon className="text-pink-400" size={20} />
                   </div>
-                  <p className="text-sm font-semibold text-gray-700">{stat.label}</p>
+                  <p className="text-sm font-semibold text-gray-700">
+                    {stat.label}
+                  </p>
                 </div>
               ))}
             </motion.div>
@@ -115,7 +153,7 @@ export default function App() {
             <motion.div
               initial={{ scale: 0 }}
               animate={{ scale: 1 }}
-              transition={{ delay: 0.8, type: 'spring', stiffness: 200 }}
+              transition={{ delay: 0.8, type: "spring", stiffness: 200 }}
               className="absolute -bottom-6 -left-6 bg-white/95 backdrop-blur-xl rounded-3xl p-6 shadow-2xl shadow-pink-200/50 max-w-[200px]"
             >
               <div className="flex items-center gap-4">
@@ -123,7 +161,9 @@ export default function App() {
                   <Sparkles className="text-pink-400" size={28} />
                 </div>
                 <div>
-                  <p className="font-extrabold text-lg text-gray-800">High Quality</p>
+                  <p className="font-extrabold text-lg text-gray-800">
+                    High Quality
+                  </p>
                   <p className="text-gray-600 text-sm">Ingredients</p>
                 </div>
               </div>
@@ -133,14 +173,16 @@ export default function App() {
             <motion.div
               initial={{ scale: 0 }}
               animate={{ scale: 1 }}
-              transition={{ delay: 1, type: 'spring', stiffness: 200 }}
+              transition={{ delay: 1, type: "spring", stiffness: 200 }}
               className="absolute -top-6 -right-6 bg-white/95 backdrop-blur-xl rounded-3xl p-5 shadow-2xl shadow-purple-200/50"
             >
               <div className="text-center">
                 <div className="bg-gradient-to-br from-purple-reguler to-blue-200 rounded-2xl p-3 mb-2 inline-block">
                   <Clock className="text-purple-400" size={24} />
                 </div>
-                <p className="font-extrabold text-sm text-gray-800">Fresh Daily</p>
+                <p className="font-extrabold text-sm text-gray-800">
+                  Fresh Daily
+                </p>
               </div>
             </motion.div>
 
@@ -162,8 +204,12 @@ export default function App() {
             transition={{ duration: 0.6 }}
             className="text-center mb-16 lg:mb-20"
           >
-            <span className="inline-block text-sm font-bold text-pink-300 tracking-wider uppercase mb-4">Premium Selection</span>
-            <h2 className="text-4xl lg:text-6xl font-extrabold mb-5 text-gray-800">OUR PRODUCTS</h2>
+            <span className="inline-block text-sm font-bold text-pink-300 tracking-wider uppercase mb-4">
+              Premium Selection
+            </span>
+            <h2 className="text-4xl lg:text-6xl font-extrabold mb-5 text-gray-800">
+              OUR PRODUCTS
+            </h2>
             <p className="text-lg lg:text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed">
               Discover our premium selection of desserts crafted with passion
             </p>
@@ -174,29 +220,32 @@ export default function App() {
             {[
               {
                 icon: IceCream,
-                title: 'Gelato',
-                description: 'Scoop up happiness with every bite of our Gelato Cups, made with the freshest milk for that irresistibly smooth and creamy texture. Packed with natural ingredients, each cup is bursting with pure, authentic flavors that will have you smiling from the first spoonful to the last.',
+                title: "Gelato",
+                description:
+                  "Scoop up happiness with every bite of our Gelato Cups, made with the freshest milk for that irresistibly smooth and creamy texture. Packed with natural ingredients, each cup is bursting with pure, authentic flavors that will have you smiling from the first spoonful to the last.",
                 image: Gelato,
-                gradient: 'from-pink-reguler via-purple-reguler to-rose-200',
-                shadowColor: 'shadow-pink-200/50',
+                gradient: "from-pink-reguler via-purple-reguler to-rose-200",
+                shadowColor: "shadow-pink-200/50",
               },
               {
                 icon: Cake,
-                title: 'Pastry',
-                description: 'Get ready for a bite of pure happiness with our delicious mix of cookies, croissants, and other delightful pastries! From the buttery, flaky goodness of our croissants to the sweet crunch of our cookies, every bite is a celebration of flavor. Perfect for sharing (or keeping all to yourself).',
+                title: "Pastry",
+                description:
+                  "Get ready for a bite of pure happiness with our delicious mix of cookies, croissants, and other delightful pastries! From the buttery, flaky goodness of our croissants to the sweet crunch of our cookies, every bite is a celebration of flavor. Perfect for sharing (or keeping all to yourself).",
                 image: Cookies,
-                gradient: 'from-purple-reguler via-purple-reguler to-violet-300',
-                shadowColor: 'shadow-purple-200/50',
+                gradient:
+                  "from-purple-reguler via-purple-reguler to-violet-300",
+                shadowColor: "shadow-purple-200/50",
               },
               {
                 icon: Candy,
-                title: 'Dubai Chocolate',
-                description: 'Indulge in the irresistible allure of our Dubai Chocolate, where every bite is a journey to pure bliss. Crafted with the finest cocoa and infused with exotic flavors, it’s a decadent treat that will transport your taste buds to chocolate paradise.',
+                title: "Dubai Chocolate",
+                description:
+                  "Indulge in the irresistible allure of our Dubai Chocolate, where every bite is a journey to pure bliss. Crafted with the finest cocoa and infused with exotic flavors, it’s a decadent treat that will transport your taste buds to chocolate paradise.",
                 image: Choco,
-                gradient: 'from-amber-200 via-orange-200 to-yellow-300',
-                shadowColor: 'shadow-amber-200/50',
+                gradient: "from-amber-200 via-orange-200 to-yellow-300",
+                shadowColor: "shadow-amber-200/50",
               },
-              
             ].map((category, idx) => (
               <motion.div
                 key={category.title}
@@ -217,22 +266,32 @@ export default function App() {
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
 
                   {/* Floating Icon */}
-                  <div className={`absolute top-6 right-6 bg-gradient-to-br ${category.gradient} rounded-2xl p-4 shadow-xl ${category.shadowColor}`}>
+                  <div
+                    className={`absolute top-6 right-6 bg-gradient-to-br ${category.gradient} rounded-2xl p-4 shadow-xl ${category.shadowColor}`}
+                  >
                     <category.icon className="text-gray-600" size={28} />
                   </div>
                 </div>
 
                 {/* Content */}
                 <div className="p-7">
-                  <h3 className="text-2xl lg:text-3xl font-extrabold mb-2 text-gray-800">{category.title}</h3>
-                  <p className="text-gray-600 mb-5 text-sm lg:text-base">{category.description}</p>
-                  <button className={`text-transparent bg-gradient-to-r ${category.gradient} bg-clip-text font-bold text-base group-hover:underline transition-all`}>
+                  <h3 className="text-2xl lg:text-3xl font-extrabold mb-2 text-gray-800">
+                    {category.title}
+                  </h3>
+                  <p className="text-gray-600 mb-5 text-sm lg:text-base">
+                    {category.description}
+                  </p>
+                  <button
+                    className={`text-transparent bg-gradient-to-r ${category.gradient} bg-clip-text font-bold text-base group-hover:underline transition-all`}
+                  >
                     Explore Collection →
                   </button>
                 </div>
 
                 {/* Decorative Blob */}
-                <div className={`absolute -bottom-12 -right-12 w-40 h-40 bg-gradient-to-br ${category.gradient} rounded-full blur-3xl opacity-20 group-hover:opacity-30 transition-opacity duration-500`} />
+                <div
+                  className={`absolute -bottom-12 -right-12 w-40 h-40 bg-gradient-to-br ${category.gradient} rounded-full blur-3xl opacity-20 group-hover:opacity-30 transition-opacity duration-500`}
+                />
               </motion.div>
             ))}
           </div>
@@ -249,8 +308,12 @@ export default function App() {
             transition={{ duration: 0.6 }}
             className="text-center mb-16 lg:mb-20"
           >
-            <span className="inline-block text-sm font-bold text-purple-300 tracking-wider uppercase mb-4">Fan Favorites</span>
-            <h2 className="text-4xl lg:text-6xl font-extrabold mb-5 text-gray-800">What's Your Favorite?</h2>
+            <span className="inline-block text-sm font-bold text-purple-300 tracking-wider uppercase mb-4">
+              Fan Favorites
+            </span>
+            <h2 className="text-4xl lg:text-6xl font-extrabold mb-5 text-gray-800">
+              What's Your Favorite?
+            </h2>
             <p className="text-lg lg:text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed">
               Our most loved flavors by gelato enthusiasts worldwide
             </p>
@@ -293,7 +356,9 @@ export default function App() {
               viewport={{ once: true }}
               transition={{ duration: 0.8 }}
             >
-              <span className="inline-block text-sm font-bold text-pink-300 tracking-wider uppercase mb-4">Our Heritage</span>
+              <span className="inline-block text-sm font-bold text-pink-300 tracking-wider uppercase mb-4">
+                Our Heritage
+              </span>
               <h2 className="text-4xl lg:text-6xl font-extrabold mb-6 lg:mb-8 text-gray-800 leading-tight">
                 About
                 <br />
@@ -304,21 +369,29 @@ export default function App() {
 
               <div className="space-y-5 mb-10">
                 <p className="text-gray-700 text-base lg:text-lg leading-relaxed">
-                  <span className="font-bold text-pink-300">Let’s Go Gelato</span> is a well-established chain with 18 stores, operating since 2016 and serving regions from North Sumatra to East Java, Indonesia.
+                  <span className="font-bold text-pink-300">
+                    Let’s Go Gelato
+                  </span>{" "}
+                  is a well-established chain with 18 stores, operating since
+                  2016 and serving regions from North Sumatra to East Java,
+                  Indonesia.
                 </p>
                 <p className="text-gray-700 text-base lg:text-lg leading-relaxed">
-                  Targeting the family market, we provide Gelato, sorbets, Pastry. Our products are crafted from locally sourced, high-quality ingredients, featuring low fat and low sugar content, while being rich in fiber and protein.
+                  Targeting the family market, we provide Gelato, sorbets,
+                  Pastry. Our products are crafted from locally sourced,
+                  high-quality ingredients, featuring low fat and low sugar
+                  content, while being rich in fiber and protein.
                 </p>
               </div>
 
               {/* button */}
               <motion.button
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
-                  className={`w-full from-blue-reguler via-purple-reguler to-pink-reguler bg-gradient-to-r text-gray-700 py-4 rounded-2xl font-bold shadow-lg hover:shadow-xl transition-all duration-300 text-sm lg:text-base`}
-                >
-                  Learn More
-                </motion.button>
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                className={`w-full from-blue-reguler via-purple-reguler to-pink-reguler bg-gradient-to-r text-gray-700 py-4 rounded-2xl font-bold shadow-lg hover:shadow-xl transition-all duration-300 text-sm lg:text-base`}
+              >
+                Learn More
+              </motion.button>
 
               {/* Stats Grid */}
               {/* <div className="grid grid-cols-3 gap-6 lg:gap-8">
@@ -349,7 +422,10 @@ export default function App() {
       </section>
 
       {/* Locations */}
-      <section id="locations" className="py-20 lg:py-32 bg-gradient-to-br from-white/60 via-purple-50/40 to-pink-reguler/40">
+      <section
+        id="locations"
+        className="py-20 lg:py-32 bg-gradient-to-br from-white/60 via-purple-50/40 to-pink-reguler/40"
+      >
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -358,8 +434,12 @@ export default function App() {
             transition={{ duration: 0.6 }}
             className="text-center mb-16 lg:mb-20"
           >
-            <span className="inline-block text-sm font-bold text-pink-300 tracking-wider uppercase mb-4">Find Us</span>
-            <h2 className="text-4xl lg:text-6xl font-extrabold mb-5 text-gray-800">Visit Our Stores</h2>
+            <span className="inline-block text-sm font-bold text-pink-300 tracking-wider uppercase mb-4">
+              Find Us
+            </span>
+            <h2 className="text-4xl lg:text-6xl font-extrabold mb-5 text-gray-800">
+              Visit Our Stores
+            </h2>
             <p className="text-lg lg:text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed">
               Experience delicious gelato at our beautiful locations
             </p>
@@ -368,32 +448,44 @@ export default function App() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
             {[
               {
-                city: 'TSM Cibubur',
-                address: 'Jl. Alternatif Cibubur No.230 A Lantai LG, Harjamukti, Cimanggis, Depok City, West Java 16454',
-                hours: 'Mon-Sun: 10:00 AM - 10:00 PM',
-                
-                image: 'https://images.unsplash.com/photo-1680438004156-51a1839bd14c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=600',
-                gradient: 'from-pink-reguler via-blue-reguler to-blue-300',
+                city: "TSM Cibubur",
+                address:
+                  "Jl. Alternatif Cibubur No.230 A Lantai LG, Harjamukti, Cimanggis, Depok City, West Java 16454",
+                hours: "Mon-Sun: 10:00 AM - 10:00 PM",
+
+                image:
+                  "https://images.unsplash.com/photo-1680438004156-51a1839bd14c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=600",
+                gradient: "from-pink-reguler via-blue-reguler to-blue-300",
               },
               {
-                city: 'Bengawan | Bandung',
-                address: 'Jl Bengawan No 29, Kota Bandung, Jawa Barat',
-                hours: 'Mon-Sun: 11:00 AM - 11:00 PM',
-                
-                image: 'https://images.unsplash.com/photo-1680438004156-51a1839bd14c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=600',
-                gradient: 'from-purple-reguler via-pink-reguler to-pink-300',
+                city: "Bengawan | Bandung",
+                address: "Jl Bengawan No 29, Kota Bandung, Jawa Barat",
+                hours: "Mon-Sun: 11:00 AM - 11:00 PM",
+
+                image:
+                  "https://images.unsplash.com/photo-1680438004156-51a1839bd14c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=600",
+                gradient: "from-purple-reguler via-pink-reguler to-pink-300",
               },
               {
-                city: 'Villagio | Karawang',
-                address: 'Jl. Bulevar Summarecon Emerald Blk. A No.Kav.1, Kondangjaya, Kec. Karawang Tim., Karawang, Jawa Barat 41371',
-                hours: 'Mon-Sun: 9:00 AM - 9:00 PM',
-                
-                image: 'https://images.unsplash.com/photo-1680438004156-51a1839bd14c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=600',
-                gradient: 'from-blue-reguler via-purple-reguler to-purple-300',
+                city: "Villagio | Karawang",
+                address:
+                  "Jl. Bulevar Summarecon Emerald Blk. A No.Kav.1, Kondangjaya, Kec. Karawang Tim., Karawang, Jawa Barat 41371",
+                hours: "Mon-Sun: 9:00 AM - 9:00 PM",
+
+                image:
+                  "https://images.unsplash.com/photo-1680438004156-51a1839bd14c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=600",
+                gradient: "from-blue-reguler via-purple-reguler to-purple-300",
               },
             ].map((location, idx) => (
-              <div className='h-full rounded-[2rem] overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-500 relative group' key={location.city}>
-                <ImageWithFallback src={location.image} alt={location.city} className="w-full h-70 object-cover group-hover:scale-110 transition-transform duration-700" />
+              <div
+                className="h-full rounded-[2rem] overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-500 relative group"
+                key={location.city}
+              >
+                <ImageWithFallback
+                  src={location.image}
+                  alt={location.city}
+                  className="w-full h-70 object-cover group-hover:scale-110 transition-transform duration-700"
+                />
                 <motion.div
                   key={location.city}
                   initial={{ opacity: 0, y: 50 }}
@@ -404,15 +496,23 @@ export default function App() {
                   className="group bg-white/80 backdrop-blur-sm rounded-[2rem] h-[450px] item-center p-8 lg:p-10 shadow-xl hover:shadow-2xl transition-all duration-500 relative overflow-hidden"
                 >
                   {/* Icon */}
-                  <div className={`inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br ${location.gradient} mb-6 shadow-xl`}>
+                  <div
+                    className={`inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br ${location.gradient} mb-6 shadow-xl`}
+                  >
                     <MapPin className="text-gray-600" size={32} />
                   </div>
 
-                  <h3 className="text-2xl lg:text-3xl font-extrabold mb-5 text-gray-800">{location.city}</h3>
+                  <h3 className="text-2xl lg:text-3xl font-extrabold mb-5 text-gray-800">
+                    {location.city}
+                  </h3>
 
                   <div className="space-y-4 text-gray-600 mb-8">
-                    <p className="text-sm lg:text-base leading-relaxed">{location.address}</p>
-                    <p className="font-bold text-gray-700 text-sm lg:text-base">{location.hours}</p>
+                    <p className="text-sm lg:text-base leading-relaxed">
+                      {location.address}
+                    </p>
+                    <p className="font-bold text-gray-700 text-sm lg:text-base">
+                      {location.hours}
+                    </p>
                   </div>
 
                   <motion.button
@@ -424,7 +524,9 @@ export default function App() {
                   </motion.button>
 
                   {/* Decorative blob */}
-                  <div className={`absolute -bottom-16 -right-16 w-48 h-48 bg-gradient-to-br ${location.gradient} rounded-full blur-3xl opacity-10 group-hover:opacity-20 transition-opacity duration-500`} />
+                  <div
+                    className={`absolute -bottom-16 -right-16 w-48 h-48 bg-gradient-to-br ${location.gradient} rounded-full blur-3xl opacity-10 group-hover:opacity-20 transition-opacity duration-500`}
+                  />
                 </motion.div>
               </div>
             ))}
@@ -451,7 +553,9 @@ export default function App() {
                 </h3>
               </div>
               <p className="text-gray-400 mb-6 leading-relaxed">
-                Let’s Go Gelato is a well-established chain with 18 stores, operating since 2016 and serving regions from North Sumatra to East Java, Indonesia.
+                Let’s Go Gelato is a well-established chain with 18 stores,
+                operating since 2016 and serving regions from North Sumatra to
+                East Java, Indonesia.
               </p>
               <div className="flex gap-3">
                 {[Instagram, Facebook, Twitter].map((Icon, idx) => (
@@ -470,11 +574,16 @@ export default function App() {
 
             {/* Quick Links */}
             <div>
-              <h4 className="font-extrabold text-lg mb-5 text-white">Quick Links</h4>
+              <h4 className="font-extrabold text-lg mb-5 text-white">
+                Quick Links
+              </h4>
               <ul className="space-y-3 text-gray-400">
-                {['Home', 'Flavors', 'About', 'Locations'].map((link) => (
+                {["Home", "Flavors", "About", "Locations"].map((link) => (
                   <li key={link}>
-                    <a href={`#${link.toLowerCase()}`} className="hover:text-pink-200 transition-colors inline-block hover:translate-x-1 duration-300">
+                    <a
+                      href={`#${link.toLowerCase()}`}
+                      className="hover:text-pink-200 transition-colors inline-block hover:translate-x-1 duration-300"
+                    >
                       {link}
                     </a>
                   </li>
@@ -484,11 +593,16 @@ export default function App() {
 
             {/* Support */}
             <div>
-              <h4 className="font-extrabold text-lg mb-5 text-white">Support</h4>
+              <h4 className="font-extrabold text-lg mb-5 text-white">
+                Support
+              </h4>
               <ul className="space-y-3 text-gray-400">
-                {['FAQ', 'Contact Us', 'Catering', 'Careers'].map((link) => (
+                {["FAQ", "Contact Us", "Catering", "Careers"].map((link) => (
                   <li key={link}>
-                    <a href="#" className="hover:text-pink-200 transition-colors inline-block hover:translate-x-1 duration-300">
+                    <a
+                      href="#"
+                      className="hover:text-pink-200 transition-colors inline-block hover:translate-x-1 duration-300"
+                    >
                       {link}
                     </a>
                   </li>
@@ -498,7 +612,9 @@ export default function App() {
 
             {/* Newsletter */}
             <div>
-              <h4 className="font-extrabold text-lg mb-5 text-white">Newsletter</h4>
+              <h4 className="font-extrabold text-lg mb-5 text-white">
+                Newsletter
+              </h4>
               <p className="text-gray-400 mb-5 text-sm leading-relaxed">
                 Subscribe for special offers and new flavors!
               </p>
@@ -523,7 +639,7 @@ export default function App() {
           {/* Bottom Bar */}
           <div className="border-t border-white/10 pt-8 text-center">
             <p className="text-gray-400 text-sm">
-              © 2026 Let's GO Gelato. All rights reserved. Made with{' '}
+              © 2026 Let's GO Gelato. All rights reserved. Made with{" "}
               <span className="text-pink-300">❤</span> and gelato.
             </p>
           </div>
