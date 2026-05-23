@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { ChevronLeft, ChevronRight, Star, Plus } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { ImageWithFallback } from './figma/ImageWithFallback';
+import { Blackforest, Blueberry, Bublegum, ChocoChashew, ChocoSorbet, CoffeeNut  } from '../imageImports';
 // @ts-ignore
 import '../../styles/globals.css';
 
@@ -10,7 +11,7 @@ const bestSellers = [
     id: 1,
     name: 'BlackForest',
     description: 'Chocolate, cherries, and cream-rich, indulgent and classic',
-    image: 'https://images.unsplash.com/photo-1571990925439-2b6072445908?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=800',
+    image: Blackforest,
     rating: 4.9,
     price: '$7.50',
     color: 'from-pink-reguler via-purple-reguler to-purple-reguler',
@@ -19,7 +20,7 @@ const bestSellers = [
     id: 2,
     name: 'Blueberry Cheesecake',
     description: 'Tangy blueberry swirl with creamy cheesecake twist',
-    image: 'https://images.unsplash.com/photo-1602532769069-0e856a643e7d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=800',
+    image: Blueberry,
     rating: 5.0,
     price: '$6.50',
     color: 'from-purple-reguler via-purple-reguler to-pink-reguler',
@@ -28,7 +29,7 @@ const bestSellers = [
     id: 3,
     name: 'Bublegum',
     description: 'Sweet, fun, and nostalgic-just like your favorite childhood treat',
-    image: 'https://images.unsplash.com/photo-1588685232180-8bb64cb4837a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=800',
+    image: Bublegum,
     rating: 4.8,
     price: '$6.50',
     color: 'from-pink-reguler via-pink-reguler to-orange-200',
@@ -37,7 +38,7 @@ const bestSellers = [
     id: 4,
     name: 'Choco Chashew',
     description: 'Creamy chocolate gelato with crunchy cashew bits for extra indulgence',
-    image: 'https://images.unsplash.com/photo-1689001896226-4bacda02550d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=800',
+    image: ChocoChashew,
     rating: 4.7,
     price: '$5.50',
     color: 'from-yellow-200 via-yellow-200 to-pink-reguler',
@@ -46,7 +47,7 @@ const bestSellers = [
     id: 5,
     name: 'Choco Sorbet',
     description: 'A refreshing, dairy-free chocolate expreience-rich and smooth',
-    image: 'https://images.unsplash.com/photo-1587372681603-5b99f6e49cf9?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=800',
+    image: ChocoSorbet,
     rating: 4.9,
     price: '$6.50',
     color: 'from-pink-reguler via-pink-reguler to-purple-reguler',
@@ -55,7 +56,7 @@ const bestSellers = [
     id: 6,
     name: 'Coffee Nut',
     description: 'Bold Coffee flavor paired with a nutty crunch in every scoop',
-    image: 'https://images.unsplash.com/photo-1587653950445-77907aa6bdd7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=800',
+    image: CoffeeNut,
     rating: 4.6,
     price: '$6.00',
     color: 'from-purple-reguler via-purple-reguler to-pink-reguler',
@@ -115,16 +116,16 @@ export function PremiumCarousel() {
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: idx * 0.1, duration: 0.5 }}
-            className="group relative bg-white/80 backdrop-blur-sm rounded-[2rem] overflow-hidden shadow-xl shadow-gray-200/50 hover:shadow-2xl hover:shadow-pink-200/50 transition-all duration-500 hover:-translate-y-3"
+            className="group relative rounded-[2rem] overflow-hidden transition-all duration-500 hover:-translate-y-3"
           >
             {/* Image Container */}
-            <div className="relative aspect-[4/5] overflow-hidden bg-gradient-to-br from-gray-50 to-gray-100">
+            <div className="relative aspect-[4/5]">
               <ImageWithFallback
                 src={item.image}
                 alt={item.name}
-                className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                className="w-full h-90 group-hover:scale-110 transition-transform duration-700"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              <div className="absolute inset-0 transition-opacity duration-500" />
 
               {/* Rating Badge */}
               <motion.div
@@ -139,7 +140,7 @@ export function PremiumCarousel() {
             </div>
 
             {/* Content */}
-            <div className="p-6 lg:p-7">
+            <div className="p-6 lg:p-7 text-center">
               <h3 className="font-bold text-xl lg:text-2xl mb-2 text-gray-800">
                 {item.name}
               </h3>

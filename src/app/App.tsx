@@ -6,6 +6,7 @@ import { ScrollToTop } from './components/ScrollToTop';
 import { ImageWithFallback } from './components/figma/ImageWithFallback';
 import { IceCream, Cake, Candy, Sparkles, MapPin, Phone, Mail, Instagram, Facebook, Twitter, Award, Users, Heart, Clock, Check, Lightbulb, BadgeCheck, Image } from 'lucide-react';
 import { motion } from 'motion/react';
+import { Hero, Gelato, Cookies, Choco } from './imageImports';
 // @ts-ignore
 import '../styles/globals.css';
 
@@ -103,7 +104,7 @@ export default function App() {
             {/* Main Image Card */}
             <div className="relative rounded-[3rem] overflow-hidden shadow-2xl shadow-pink-200/50">
               <ImageWithFallback
-                src="https://images.unsplash.com/photo-1680438004156-51a1839bd14c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=1000"
+                src={Hero}
                 alt="Delicious Italian gelato"
                 className="w-full h-[500px] lg:h-[650px] object-cover"
               />
@@ -175,7 +176,7 @@ export default function App() {
                 icon: IceCream,
                 title: 'Gelato',
                 description: 'Scoop up happiness with every bite of our Gelato Cups, made with the freshest milk for that irresistibly smooth and creamy texture. Packed with natural ingredients, each cup is bursting with pure, authentic flavors that will have you smiling from the first spoonful to the last.',
-                image: 'https://images.unsplash.com/photo-1759314420838-36d3d881c81c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=600',
+                image: Gelato,
                 gradient: 'from-pink-reguler via-purple-reguler to-rose-200',
                 shadowColor: 'shadow-pink-200/50',
               },
@@ -183,7 +184,7 @@ export default function App() {
                 icon: Cake,
                 title: 'Pastry',
                 description: 'Get ready for a bite of pure happiness with our delicious mix of cookies, croissants, and other delightful pastries! From the buttery, flaky goodness of our croissants to the sweet crunch of our cookies, every bite is a celebration of flavor. Perfect for sharing (or keeping all to yourself).',
-                image: 'https://images.unsplash.com/photo-1769812343875-c40f9ec7f846?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=600',
+                image: Cookies,
                 gradient: 'from-purple-reguler via-purple-reguler to-violet-300',
                 shadowColor: 'shadow-purple-200/50',
               },
@@ -191,7 +192,7 @@ export default function App() {
                 icon: Candy,
                 title: 'Dubai Chocolate',
                 description: 'Indulge in the irresistible allure of our Dubai Chocolate, where every bite is a journey to pure bliss. Crafted with the finest cocoa and infused with exotic flavors, it’s a decadent treat that will transport your taste buds to chocolate paradise.',
-                image: 'https://images.unsplash.com/photo-1772985809496-e2f12a22b1b1?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=600',
+                image: Choco,
                 gradient: 'from-amber-200 via-orange-200 to-yellow-300',
                 shadowColor: 'shadow-amber-200/50',
               },
