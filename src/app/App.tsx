@@ -23,9 +23,11 @@ import {
   Lightbulb,
   BadgeCheck,
   Image,
+  Link,
+  ChevronDown,
 } from "lucide-react";
 import { motion } from "motion/react";
-import { Hero, Gelato, Cookies, Choco } from "./imageImports";
+import { Hero, Gelato, Cookies, Choco, Our, logo, Bengawan, Tsm, Villagio } from "./imageImports";
 // @ts-ignore
 import "../styles/globals.css";
 
@@ -204,7 +206,7 @@ export default function App() {
             transition={{ duration: 0.6 }}
             className="text-center mb-16 lg:mb-20"
           >
-            <span className="inline-block text-sm font-bold text-pink-300 tracking-wider uppercase mb-4">
+            <span className="inline-block text-sm font-bold text-blue-300 tracking-wider uppercase mb-4">
               Premium Selection
             </span>
             <h2 className="text-4xl lg:text-6xl font-extrabold mb-5 text-gray-800">
@@ -308,7 +310,7 @@ export default function App() {
             transition={{ duration: 0.6 }}
             className="text-center mb-16 lg:mb-20"
           >
-            <span className="inline-block text-sm font-bold text-purple-300 tracking-wider uppercase mb-4">
+            <span className="inline-block text-sm font-bold text-blue-300 tracking-wider uppercase mb-4">
               Fan Favorites
             </span>
             <h2 className="text-4xl lg:text-6xl font-extrabold mb-5 text-gray-800">
@@ -324,7 +326,7 @@ export default function App() {
 
       {/* About Section */}
       <section id="about" className="py-20 lg:py-32 relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-pink-50/50 via-transparent to-purple-reguler/50 pointer-events-none" />
+        <div className="absolute inset-0 bg-transparent pointer-events-none" />
 
         <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
@@ -336,17 +338,17 @@ export default function App() {
               transition={{ duration: 0.8 }}
               className="relative"
             >
-              <div className="relative rounded-[3rem] overflow-hidden shadow-2xl shadow-pink-200/50">
+              <div className="relative rounded-[3rem] bg-transparent overflow-hidden">
                 <ImageWithFallback
-                  src="https://images.unsplash.com/photo-1772290677193-b3d2ed5ffa57?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=900"
+                  src={Our}
                   alt="Artisan gelato making"
-                  className="w-full h-[550px] object-cover"
+                  className="w-full h-[550px] lg:h-[700px] object-contain"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-pink-reguler/20 via-transparent to-purple-200/10" />
+                <div className="absolute inset-0 bg-transparent" />
               </div>
 
               {/* Decorative blob */}
-              <div className="absolute -z-10 -bottom-10 -left-10 w-64 h-64 bg-gradient-to-br from-pink-reguler/40 to-purple-200/40 rounded-full blur-3xl" />
+              <div className="absolute -z-10 -bottom-10 -left-10 w-64 h-64 bg-gradient-to-br from-pink-200/40 to-purple-200/40 rounded-full blur-3xl" />
             </motion.div>
 
             {/* Content Side */}
@@ -356,7 +358,7 @@ export default function App() {
               viewport={{ once: true }}
               transition={{ duration: 0.8 }}
             >
-              <span className="inline-block text-sm font-bold text-pink-300 tracking-wider uppercase mb-4">
+              <span className="inline-block text-sm font-bold text-blue-300 tracking-wider uppercase mb-4">
                 Our Heritage
               </span>
               <h2 className="text-4xl lg:text-6xl font-extrabold mb-6 lg:mb-8 text-gray-800 leading-tight">
@@ -426,7 +428,7 @@ export default function App() {
         id="locations"
         className="py-20 lg:py-32 bg-gradient-to-br from-white/60 via-purple-50/40 to-pink-reguler/40"
       >
-        <div className="max-w-7xl mx-auto px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto px-6 lg:px-8 w-full text-center">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -434,7 +436,7 @@ export default function App() {
             transition={{ duration: 0.6 }}
             className="text-center mb-16 lg:mb-20"
           >
-            <span className="inline-block text-sm font-bold text-pink-300 tracking-wider uppercase mb-4">
+            <span className="inline-block text-sm font-bold text-blue-300 tracking-wider uppercase mb-4">
               Find Us
             </span>
             <h2 className="text-4xl lg:text-6xl font-extrabold mb-5 text-gray-800">
@@ -445,36 +447,36 @@ export default function App() {
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 text-start">
             {[
               {
                 city: "TSM Cibubur",
                 address:
                   "Jl. Alternatif Cibubur No.230 A Lantai LG, Harjamukti, Cimanggis, Depok City, West Java 16454",
-                hours: "Mon-Sun: 10:00 AM - 10:00 PM",
+                
 
                 image:
-                  "https://images.unsplash.com/photo-1680438004156-51a1839bd14c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=600",
-                gradient: "from-pink-reguler via-blue-reguler to-blue-300",
+                  Tsm,
+                gradient: "from-blue-reguler via-purple-reguler to-pink-reguler",
               },
               {
                 city: "Bengawan | Bandung",
                 address: "Jl Bengawan No 29, Kota Bandung, Jawa Barat",
-                hours: "Mon-Sun: 11:00 AM - 11:00 PM",
+                
 
                 image:
-                  "https://images.unsplash.com/photo-1680438004156-51a1839bd14c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=600",
-                gradient: "from-purple-reguler via-pink-reguler to-pink-300",
+                  Bengawan,
+                gradient: "from-blue-reguler via-purple-reguler to-pink-reguler",
               },
               {
                 city: "Villagio | Karawang",
                 address:
                   "Jl. Bulevar Summarecon Emerald Blk. A No.Kav.1, Kondangjaya, Kec. Karawang Tim., Karawang, Jawa Barat 41371",
-                hours: "Mon-Sun: 9:00 AM - 9:00 PM",
+                
 
                 image:
-                  "https://images.unsplash.com/photo-1680438004156-51a1839bd14c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=600",
-                gradient: "from-blue-reguler via-purple-reguler to-purple-300",
+                  Villagio,
+                gradient: "from-blue-reguler via-purple-reguler to-pink-reguler",
               },
             ].map((location, idx) => (
               <div
@@ -493,13 +495,13 @@ export default function App() {
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: idx * 0.1 }}
                   whileHover={{ y: -8 }}
-                  className="group bg-white/80 backdrop-blur-sm rounded-[2rem] h-[450px] item-center p-8 lg:p-10 shadow-xl hover:shadow-2xl transition-all duration-500 relative overflow-hidden"
+                  className="group bg-white/80 backdrop-blur-sm rounded-[2rem] h-[400px] item-center p-8 lg:p-10 shadow-xl hover:shadow-2xl transition-all duration-500 relative overflow-hidden"
                 >
                   {/* Icon */}
                   <div
-                    className={`inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br ${location.gradient} mb-6 shadow-xl`}
+                    className={`inline-flex items-center justify-center w-16 h-16 rounded-2xl shadow-2xl  mb-6 shadow-xl`}
                   >
-                    <MapPin className="text-gray-600" size={32} />
+                    <MapPin className="text-blue-reguler" size={32} />
                   </div>
 
                   <h3 className="text-2xl lg:text-3xl font-extrabold mb-5 text-gray-800">
@@ -510,15 +512,13 @@ export default function App() {
                     <p className="text-sm lg:text-base leading-relaxed">
                       {location.address}
                     </p>
-                    <p className="font-bold text-gray-700 text-sm lg:text-base">
-                      {location.hours}
-                    </p>
+                    
                   </div>
 
                   <motion.button
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
-                    className={`w-full bg-gradient-to-r ${location.gradient} text-gray-700 py-4 rounded-2xl font-bold shadow-lg hover:shadow-xl transition-all duration-300 text-sm lg:text-base`}
+                    className={`w-full border-2 border-blue-reguler text-pink-400 py-4 rounded-2xl font-bold shadow-lg hover:shadow-xl transition-all duration-300 text-sm lg:text-base`}
                   >
                     Get Directions
                   </motion.button>
@@ -531,6 +531,16 @@ export default function App() {
               </div>
             ))}
           </div>
+          <motion.div
+              whileHover={{ y: -10, x: -5 }}
+              whileTap={{ scale: 0.98 }}
+              className="inline-block mt-12 text-sm font-semibold text-blue-reguler transition-colors hover:translate-x-1 duration-300"
+              >
+                <a href="#" className="flex flex-col items-center gap-1 text-xl font-bold">
+                  View All Locations
+                  <ChevronDown size={30} />
+                </a>
+          </motion.div>
         </div>
       </section>
 
@@ -545,12 +555,7 @@ export default function App() {
             {/* Brand Column */}
             <div className="lg:col-span-1">
               <div className="flex items-center gap-3 mb-5">
-                <div className="bg-gradient-to-br from-pink-reguler via-purple-200 to-blue-200 rounded-2xl p-2.5 shadow-lg">
-                  <Sparkles className="text-pink-400" size={24} />
-                </div>
-                <h3 className="text-3xl font-extrabold bg-gradient-to-r from-pink-reguler via-purple-200 to-blue-200 bg-clip-text text-transparent">
-                  Dolce Vita
-                </h3>
+                <img src={logo} alt="Gelato Logo" className="w-50 h-20 object-contain" />
               </div>
               <p className="text-gray-400 mb-6 leading-relaxed">
                 Let’s Go Gelato is a well-established chain with 18 stores,

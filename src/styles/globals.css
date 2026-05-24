@@ -55,3 +55,7 @@
 .text-blue-reguler {
     color: var(--color-blue-reguler);
 }
+
+.border-blue-reguler {
+    border-color: var(--color-blue-reguler);
+}

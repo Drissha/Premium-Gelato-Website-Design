@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
 import { ShoppingBag, Menu, X, Sparkles } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
+// @ts-ignore
+import logo from '../../assets/images/logo.png';
 
 export function GelatoNavbar() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -32,12 +34,11 @@ export function GelatoNavbar() {
             whileHover={{ scale: 1.05 }}
             className="flex items-center gap-3"
           >
-            <div className="bg-gradient-to-br from-pink-reguler via-purple-200 to-blue-200 rounded-2xl p-2.5 shadow-lg">
-              <Sparkles className="text-pink-400" size={24} />
-            </div>
-            <span className="text-2xl lg:text-3xl font-extrabold bg-gradient-to-r from-pink-reguler via-purple-reguler to-blue-reguler bg-clip-text text-transparent">
-              Dolce Vita
-            </span>
+            
+            
+              <div className="w-100">
+               <img src={logo} alt="Gelato Logo" className="w-50 h-20 object-contain" />
+              </div>
           </motion.div>
 
           {/* Desktop Menu */}
@@ -46,16 +47,16 @@ export function GelatoNavbar() {
               <a
                 key={item}
                 href={`#${item.toLowerCase()}`}
-                className="relative text-gray-700 hover:text-pink-300 transition-all duration-300 font-medium group"
+                className="relative text-gray-700 hover:text-blue-300 transition-all duration-300 font-medium group"
               >
                 {item}
-                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-pink-reguler to-purple-200 group-hover:w-full transition-all duration-300" />
+                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-reguler to-purple-200 group-hover:w-full transition-all duration-300" />
               </a>
             ))}
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="flex items-center gap-2 bg-gradient-to-r from-pink-reguler via-purple-200 to-pink-200 bg-[length:200%_100%] hover:bg-right text-gray-700 px-6 lg:px-8 py-3 rounded-full shadow-lg shadow-pink-200/50 hover:shadow-xl hover:shadow-pink-300/60 transition-all duration-300"
+              className="flex items-center gap-2 bg-gradient-to-r from-blue-reguler via-purple-200 to-pink-reguler bg-[length:200%_100%] hover:bg-right text-gray-700 px-6 lg:px-8 py-3 rounded-full shadow-lg shadow-blue-200/50 hover:shadow-xl hover:shadow-blue-300/60 transition-all duration-300"
             >
               <ShoppingBag size={18} />
               <span>Order Now</span>
@@ -98,7 +99,7 @@ export function GelatoNavbar() {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.4 }}
-                  className="flex items-center justify-center gap-2 bg-gradient-to-r from-pink-reguler to-purple-200 text-gray-700 px-6 py-3 rounded-full shadow-lg mt-2"
+                  className="flex items-center justify-center gap-2 bg-gradient-to-r from-pink-reguler via-purple-reguler to-purple-200 text-gray-700 px-6 py-3 rounded-full shadow-lg mt-2"
                 >
                   <ShoppingBag size={18} />
                   Order Now

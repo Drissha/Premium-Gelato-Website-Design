@@ -151,7 +151,7 @@ export function PremiumCarousel() {
 
             {/* Content */}
             <div className="p-6 lg:p-7 text-center">
-              <h3 className="font-bold text-xl lg:text-2xl mb-2 text-gray-800">
+              <h3 className="font-bold text-xl text-blue-reguler lg:text-2xl mb-2 text-gray-800">
                 {item.name}
               </h3>
               <p className="text-gray-600 text-sm lg:text-base mb-5 leading-relaxed">

@@ -8,5 +8,10 @@ import Bublegum from '../assets/images/bublegum.png';
 import ChocoChashew from '../assets/images/cashew.png';
 import ChocoSorbet from '../assets/images/sorbet.png';
 import CoffeeNut from '../assets/images/coffeenut.png'; 
+import Our from '../assets/images/our.png';
+import logo from '../assets/images/logo.png';
+import Tsm from '../assets/images/TSM.png';
+import Bengawan from '../assets/images/bengawan.png';
+import Villagio from '../assets/images/villagio.png';
 
-export { Hero, Gelato, Cookies, Choco, Blackforest, Blueberry, Bublegum, ChocoChashew, ChocoSorbet, CoffeeNut };
+export { Hero, Gelato, Cookies, Choco, Blackforest, Blueberry, Bublegum, ChocoChashew, ChocoSorbet, CoffeeNut , Our, logo, Tsm, Bengawan, Villagio };
