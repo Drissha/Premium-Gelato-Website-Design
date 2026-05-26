@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { Link, useLocation } from 'react-router';
 import { ShoppingBag, Menu, X, Sparkles } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 // @ts-ignore
@@ -7,6 +8,8 @@ import logo from '../../assets/images/logo.png';
 export function GelatoNavbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const location = useLocation();
+  const isHomePage = location.pathname === '/';
 
   useEffect(() => {
     const handleScroll = () => {
@@ -43,20 +46,38 @@ export function GelatoNavbar() {
 
           {/* Desktop Menu */}
           <div className="hidden md:flex items-center gap-8 lg:gap-10">
-            {['Home', 'Flavors', 'About', 'Locations'].map((item) => (
-              <a
-                key={item}
-                href={`#${item.toLowerCase()}`}
-                className="relative text-gray-700 hover:text-blue-300 transition-all duration-300 font-medium group"
-              >
-                {item}
-                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-reguler to-purple-200 group-hover:w-full transition-all duration-300" />
-              </a>
-            ))}
+            <Link
+              to="/"
+              className="relative text-gray-700 hover:text-pink-300 transition-all duration-300 font-medium group"
+            >
+              Home
+              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-pink-200 to-purple-200 group-hover:w-full transition-all duration-300" />
+            </Link>
+            <Link
+              to="/products"
+              className="relative text-gray-700 hover:text-pink-300 transition-all duration-300 font-medium group"
+            >
+              Products
+              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-pink-200 to-purple-200 group-hover:w-full transition-all duration-300" />
+            </Link>
+            <Link
+              to="/about"
+              className="relative text-gray-700 hover:text-pink-300 transition-all duration-300 font-medium group"
+            >
+              About
+              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-pink-200 to-purple-200 group-hover:w-full transition-all duration-300" />
+            </Link>
+            <Link
+              to="/locations"
+              className="relative text-gray-700 hover:text-pink-300 transition-all duration-300 font-medium group"
+            >
+              Locations
+              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-pink-200 to-purple-200 group-hover:w-full transition-all duration-300" />
+            </Link>
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="flex items-center gap-2 bg-gradient-to-r from-blue-reguler via-purple-200 to-pink-reguler bg-[length:200%_100%] hover:bg-right text-gray-700 px-6 lg:px-8 py-3 rounded-full shadow-lg shadow-blue-200/50 hover:shadow-xl hover:shadow-blue-300/60 transition-all duration-300"
+              className="flex items-center gap-2 bg-gradient-to-r from-pink-200 via-purple-200 to-pink-200 bg-[length:200%_100%] hover:bg-right text-gray-700 px-6 lg:px-8 py-3 rounded-full shadow-lg shadow-pink-200/50 hover:shadow-xl hover:shadow-pink-300/60 transition-all duration-300"
             >
               <ShoppingBag size={18} />
               <span>Order Now</span>
