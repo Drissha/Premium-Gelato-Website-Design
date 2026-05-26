@@ -164,7 +164,13 @@ export function ProductsPage() {
 
     // Filter by category
     if (activeCategory !== 'All') {
-      filtered = filtered.filter((p) => p.category === activeCategory);
+      filtered = filtered.filter((p) => {
+        if (Array.isArray(p.category)) {
+          return p.category.includes(activeCategory);
+        }
+
+        return p.category === activeCategory;
+      });
     }
 
     // Filter by search
@@ -333,7 +339,9 @@ export function ProductsPage() {
                 <div className="p-6">
                   <div className="mb-2">
                     <span className="text-xs font-semibold text-pink-300 uppercase tracking-wider">
-                      {product.category}
+                      {Array.isArray(product.category)
+                        ? product.category.join(' • ')
+                        : product.category}
                     </span>
                   </div>
                   <h3 className="font-bold text-xl mb-2 text-gray-800">{product.name}</h3>
