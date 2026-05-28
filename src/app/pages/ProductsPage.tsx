@@ -1,17 +1,19 @@
-import { useState, useMemo } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Search, SlidersHorizontal, Star, Plus } from 'lucide-react';
 import { ImageWithFallback } from '../components/figma/ImageWithFallback';
 
-const categories = ['All', 'Gelato', 'Sorbet', 'Pastry', 'Chocolate', 'Seasonal'];
+const categories = ['All', 'Gelato', 'Pastry', 'Chocolate'];
+const PRODUCTS_PER_PAGE = 8;
 
 const allProducts = [
   // Gelato
   {
     id: 1,
-    name: 'Pistachio Siciliano',
+    name: 'Strawberry Milkshake',
     category: 'Gelato',
-    description: 'Premium Sicilian pistachios with honey',
+    subcategory: 'Milk Based',
+    description: 'Gluten Free, Egg Free',
     price: '$7.50',
     rating: 4.9,
     image: 'https://images.unsplash.com/photo-1571990925439-2b6072445908?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=600',
@@ -19,19 +21,21 @@ const allProducts = [
   },
   {
     id: 2,
-    name: 'Fragola Fresca',
-    category: ['Gelato', 'Seasonal'],
-    description: 'Fresh strawberries with vanilla bean',
+    name: 'Berry Yogurt',
+    category: 'Gelato',
+    subcategory: 'Milk Based',
+    description: 'Gluten Free',
     price: '$6.50',
     rating: 5.0,
     image: 'https://images.unsplash.com/photo-1602532769069-0e856a643e7d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=600',
-    seasonal: true,
+    seasonal: false,
   },
   {
     id: 3,
-    name: 'Cioccolato Noir',
+    name: 'Unicorn',
     category: 'Gelato',
-    description: 'Rich Belgian dark chocolate',
+    subcategory: 'Milk Based',
+    description: 'Gluten Free, Egg Free',
     price: '$6.50',
     rating: 4.8,
     image: 'https://images.unsplash.com/photo-1588685232180-8bb64cb4837a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=600',
@@ -39,9 +43,10 @@ const allProducts = [
   },
   {
     id: 4,
-    name: 'Vaniglia Classica',
+    name: 'After Eight',
     category: 'Gelato',
-    description: 'Madagascar vanilla bean',
+    subcategory: 'Milk Based',
+    description: 'Gluten Free, Egg Free',
     price: '$6.00',
     rating: 4.6,
     image: 'https://images.unsplash.com/photo-1587653950445-77907aa6bdd7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=600',
@@ -50,9 +55,10 @@ const allProducts = [
   // Sorbet
   {
     id: 5,
-    name: 'Limone Sorbet',
-    category: 'Sorbet',
-    description: 'Zesty Amalfi lemons with mint',
+    name: 'Tiramisu Klasik',
+    category: 'Gelato',
+    subcategory: 'Milk Based',
+    description: 'Egg Free',
     price: '$5.50',
     rating: 4.7,
     image: 'https://images.unsplash.com/photo-1689001896226-4bacda02550d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=600',
@@ -60,9 +66,10 @@ const allProducts = [
   },
   {
     id: 6,
-    name: 'Mango Passione',
-    category: 'Sorbet',
-    description: 'Tropical mango with passion fruit',
+    name: 'Bubble Gum',
+    category: 'Gelato',
+    subcategory: 'Milk Based',
+    description: 'Gluten Free, Egg Free',
     price: '$6.50',
     rating: 4.9,
     image: 'https://images.unsplash.com/photo-1587372681603-5b99f6e49cf9?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=600',
@@ -70,9 +77,10 @@ const allProducts = [
   },
   {
     id: 7,
-    name: 'Berry Mix Sorbet',
-    category: 'Sorbet',
-    description: 'Strawberry, raspberry, blackberry blend',
+    name: 'Blueberry Cheesecake',
+    category: 'Gelato',
+    subcategory: 'Milk Based',
+    description: 'Egg Free',
     price: '$5.50',
     rating: 4.8,
     image: 'https://images.unsplash.com/photo-1532678465554-94846274c297?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=600',
@@ -81,9 +89,10 @@ const allProducts = [
   // Pastry
   {
     id: 8,
-    name: 'Tiramisu Classico',
-    category: 'Pastry',
-    description: 'Traditional Italian coffee dessert',
+    name: 'Popcorn Caramel',
+    category: 'Gelato',
+    subcategory: 'Milk Based',
+    description: 'Gluten Free, Egg Free',
     price: '$8.50',
     rating: 5.0,
     image: 'https://images.unsplash.com/photo-1769812343875-c40f9ec7f846?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=600',
@@ -91,9 +100,10 @@ const allProducts = [
   },
   {
     id: 9,
-    name: 'Cannoli Siciliani',
-    category: 'Pastry',
-    description: 'Crispy shells with sweet ricotta',
+    name: 'Milky Way',
+    category: 'Gelato',
+    subcategory: 'Milk Based',
+    description: 'Egg Free',
     price: '$7.00',
     rating: 4.9,
     image: 'https://images.unsplash.com/photo-1769812343628-81300c21753c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=600',
@@ -101,9 +111,10 @@ const allProducts = [
   },
   {
     id: 10,
-    name: 'Panna Cotta',
-    category: 'Pastry',
-    description: 'Creamy vanilla with berry compote',
+    name: 'Biscof',
+    category: 'Gelato',
+    subcategory: 'Milk Based',
+    description: 'Egg Free',
     price: '$6.50',
     rating: 4.7,
     image: 'https://images.unsplash.com/photo-1764380746818-18c01e96df12?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=600',
@@ -112,9 +123,10 @@ const allProducts = [
   // Chocolate
   {
     id: 11,
-    name: 'Chocolate Truffle',
-    category: 'Chocolate',
-    description: 'Belgian chocolate with hazelnut',
+    name: 'Japanese Matcha',
+    category: 'Gelato',
+    subcategory: 'Milk Based',
+    description: 'Gluten Free, Egg Free',
     price: '$9.00',
     rating: 5.0,
     image: 'https://images.unsplash.com/photo-1772985809496-e2f12a22b1b1?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=600',
@@ -122,41 +134,80 @@ const allProducts = [
   },
   {
     id: 12,
-    name: 'Chocolate Bark',
-    category: 'Chocolate',
-    description: 'Dark chocolate with pistachios',
+    name: 'Sea Salt Caramel',
+    category: 'Gelato',
+    subcategory: 'Milk Based',
+    description: 'Gluten Free, Egg Free',
     price: '$12.00',
     rating: 4.8,
     image: 'https://images.unsplash.com/photo-1772985811111-c90aa569792b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=600',
     seasonal: false,
   },
-  // Seasonal
   {
     id: 13,
-    name: 'Pumpkin Spice Gelato',
-    category: 'Seasonal',
-    description: 'Autumn spices with pumpkin',
+    name: 'Vanilla Original',
+    category: 'Gelato',
+    subcategory: 'Milk Based',
+    description: 'Gluten Free',
     price: '$7.50',
     rating: 4.9,
     image: 'https://images.unsplash.com/photo-1596962680524-5116314fb8ae?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=600',
-    seasonal: true,
+    seasonal: false,
   },
   {
     id: 14,
-    name: 'Strawberry Fields',
-    category: 'Seasonal',
-    description: 'Summer fresh strawberries',
+    name: 'Vanilla Almond Pralines',
+    category: 'Gelato',
+    subcategory: 'Milk Based',
+    description: 'Gluten Free',
     price: '$7.00',
     rating: 5.0,
     image: 'https://images.unsplash.com/photo-1579954115567-dff2eeb6fdeb?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=600',
-    seasonal: true,
+    seasonal: false,
+  },
+  {
+    id: 15,
+    name: 'Biscoff Cheese Cake',
+    category: 'Gelato',
+    subcategory: 'Milk Based',
+    description: 'Egg Free',
+    price: '$7.50',
+    rating: 4.9,
+    image: 'https://images.unsplash.com/photo-1596962680524-5116314fb8ae?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=600',
+    seasonal: false,
+  },
+  {
+    id: 16,
+    name: 'Matcha Brownie',
+    category: 'Gelato',
+    subcategory: 'Milk Based',
+    description: 'Egg Free',
+    price: '$7.00',
+    rating: 5.0,
+    image: 'https://images.unsplash.com/photo-1579954115567-dff2eeb6fdeb?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=600',
+    seasonal: false,
   },
 ];
 
 export function ProductsPage() {
   const [activeCategory, setActiveCategory] = useState('All');
+  const [activeSubCategory, setActiveSubCategory] = useState('All');
   const [searchQuery, setSearchQuery] = useState('');
   const [sortBy, setSortBy] = useState('popular');
+  const [visibleCount, setVisibleCount] = useState(PRODUCTS_PER_PAGE);
+
+  const availableSubCategories = useMemo(() => {
+    const productsInCategory =
+      activeCategory === 'All'
+        ? allProducts
+        : allProducts.filter((product) =>
+            Array.isArray(product.category)
+              ? product.category.includes(activeCategory)
+              : product.category === activeCategory
+          );
+
+    return ['All', ...Array.from(new Set(productsInCategory.map((product) => product.subcategory).filter(Boolean)))];
+  }, [activeCategory]);
 
   // Filter and sort products
   const filteredProducts = useMemo(() => {
@@ -171,6 +222,11 @@ export function ProductsPage() {
 
         return p.category === activeCategory;
       });
+    }
+
+    // Filter by sub-category
+    if (activeSubCategory !== 'All') {
+      filtered = filtered.filter((product) => product.subcategory === activeSubCategory);
     }
 
     // Filter by search
@@ -193,7 +249,18 @@ export function ProductsPage() {
     }
 
     return filtered;
-  }, [activeCategory, searchQuery, sortBy]);
+  }, [activeCategory, activeSubCategory, searchQuery, sortBy]);
+
+  useEffect(() => {
+    setVisibleCount(PRODUCTS_PER_PAGE);
+  }, [activeCategory, activeSubCategory, searchQuery, sortBy]);
+
+  const visibleProducts = useMemo(
+    () => filteredProducts.slice(0, visibleCount),
+    [filteredProducts, visibleCount]
+  );
+
+  const hasMoreProducts = visibleCount < filteredProducts.length;
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-cream-50 via-pink-50/30 to-purple-50/30 pt-24 pb-20">
@@ -252,28 +319,68 @@ export function ProductsPage() {
         </motion.div>
 
         {/* Category Filter Buttons */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.3 }}
-          className="mb-12 flex flex-wrap gap-3 justify-center"
-        >
-          {categories.map((category) => (
-            <motion.button
-              key={category}
-              onClick={() => setActiveCategory(category)}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className={`px-6 lg:px-8 py-3 lg:py-3.5 rounded-full font-semibold transition-all duration-300 ${
-                activeCategory === category
-                  ? 'bg-gradient-to-r from-pink-200 to-purple-200 text-gray-700 shadow-xl shadow-pink-200/50'
-                  : 'bg-white/80 backdrop-blur-md text-gray-600 hover:bg-white shadow-lg hover:shadow-xl'
-              }`}
-            >
-              {category}
-            </motion.button>
-          ))}
-        </motion.div>
+        <div className="flex flex-col sm:flex-row mb-8 gap-4 sm:gap-12 overflow-x-auto pb-2">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+            className="mb-12"
+          >
+            <div className="flex items-center justify-between flex-wrap gap-2 mb-4">
+              <h2 className="text-lg font-semibold text-gray-800">Category</h2>
+            </div>
+            <div className="flex flex-wrap gap-3 justify-center items-center">
+              {categories.map((category) => (
+                <motion.button
+                  key={category}
+                  onClick={() => {
+                    setActiveCategory(category);
+                    setActiveSubCategory('All');
+                  }}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  className={`px-6 lg:px-8 py-3 lg:py-3.5 rounded-full font-semibold transition-all duration-300 ${
+                    activeCategory === category
+                      ? 'bg-gradient-to-r from-pink-200 to-purple-200 text-gray-700 shadow-xl shadow-pink-200/50'
+                      : 'bg-white/80 backdrop-blur-md text-gray-600 hover:bg-white shadow-lg hover:shadow-xl'
+                  }`}
+                >
+                  {category}
+                </motion.button>
+              ))}
+            </div>
+          </motion.div>
+
+          {/* Sub Category Filter Buttons */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.35 }}
+            className="mb-10"
+          >
+            <div className="flex items-center justify-between flex-wrap gap-2 mb-4">
+              <h2 className="text-lg font-semibold text-gray-800">Sub Category</h2>
+              
+            </div>
+            <div className="flex flex-wrap gap-3 justify-center">
+              {availableSubCategories.map((subCategory) => (
+                <motion.button
+                  key={subCategory}
+                  onClick={() => setActiveSubCategory(subCategory)}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  className={`px-5 py-2.5 rounded-full font-semibold transition-all duration-300 ${
+                    activeSubCategory === subCategory
+                      ? 'bg-gradient-to-r from-purple-200 to-pink-200 text-gray-700 shadow-xl shadow-purple-200/50'
+                      : 'bg-white/80 backdrop-blur-md text-gray-600 hover:bg-white shadow-lg hover:shadow-xl'
+                  }`}
+                >
+                  {subCategory}
+                </motion.button>
+              ))}
+            </div>
+          </motion.div>
+        </div>
 
         {/* Results Count */}
         <motion.div
@@ -294,7 +401,7 @@ export function ProductsPage() {
             transition={{ duration: 0.3 }}
             className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 lg:gap-8"
           >
-            {filteredProducts.map((product, idx) => (
+            {visibleProducts.map((product, idx) => (
               <motion.div
                 key={product.id}
                 initial={{ opacity: 0, y: 20 }}
@@ -343,6 +450,11 @@ export function ProductsPage() {
                         ? product.category.join(' • ')
                         : product.category}
                     </span>
+                    {product.subcategory && (
+                      <span className="mt-2 inline-flex rounded-full bg-purple-100/80 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.2em] text-purple-700">
+                        {product.subcategory}
+                      </span>
+                    )}
                   </div>
                   <h3 className="font-bold text-xl mb-2 text-gray-800">{product.name}</h3>
                   <p className="text-gray-600 text-sm mb-4 line-clamp-2">{product.description}</p>
@@ -356,7 +468,7 @@ export function ProductsPage() {
                       whileTap={{ scale: 0.95 }}
                       className="bg-gradient-to-r from-pink-200 to-purple-200 text-gray-700 px-5 py-2 rounded-full text-sm font-bold shadow-lg hover:shadow-xl transition-all duration-300"
                     >
-                      Add to Cart
+                      Order Now
                     </motion.button>
                   </div>
                 </div>
@@ -378,8 +490,8 @@ export function ProductsPage() {
           </motion.div>
         )}
 
-        {/* Load More Button */}
-        {filteredProducts.length > 0 && (
+        {/* Show More / Show Less Button */}
+        {filteredProducts.length > PRODUCTS_PER_PAGE && (
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -389,9 +501,16 @@ export function ProductsPage() {
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
+              onClick={() =>
+                setVisibleCount((current) =>
+                  hasMoreProducts
+                    ? Math.min(current + PRODUCTS_PER_PAGE, filteredProducts.length)
+                    : PRODUCTS_PER_PAGE
+                )
+              }
               className="bg-white/80 backdrop-blur-md text-gray-700 px-10 py-4 rounded-full font-bold shadow-xl hover:shadow-2xl transition-all duration-300 border-2 border-gray-100 hover:border-pink-200"
             >
-              Load More Products
+              {hasMoreProducts ? 'Show More' : 'Show Less'}
             </motion.button>
           </motion.div>
         )}

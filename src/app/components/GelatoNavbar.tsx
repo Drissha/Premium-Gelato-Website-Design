@@ -19,16 +19,16 @@ export function GelatoNavbar() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  const navBackgroundClass = isScrolled
+    ? 'bg-white/80 backdrop-blur-xl shadow-xl shadow-pink-100/50'
+    : 'bg-white/80 backdrop-blur-xl shadow-xl shadow-pink-100/50 md:bg-transparent md:shadow-none md:backdrop-blur-none';
+
   return (
     <motion.nav
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.6 }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-        isScrolled
-          ? 'bg-white/80 backdrop-blur-xl shadow-xl shadow-pink-100/50'
-          : 'bg-transparent'
-      }`}
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${navBackgroundClass}`}
     >
       <div className="max-w-7xl mx-auto px-6 lg:px-8 py-5">
         <div className="flex items-center justify-between">
@@ -39,8 +39,8 @@ export function GelatoNavbar() {
           >
             
             
-              <div className="w-100">
-               <img src={logo} alt="Gelato Logo" className="w-50 h-20 object-contain" />
+              <div className="sm:w-100">
+               <img src={logo} alt="Gelato Logo" className="sm:w-50 w-20 sm:h-20 h-10 object-contain" />
               </div>
           </motion.div>
 
