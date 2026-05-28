@@ -13,5 +13,14 @@ import logo from '../assets/images/logo.png';
 import Tsm from '../assets/images/TSM.png';
 import Bengawan from '../assets/images/bengawan.png';
 import Villagio from '../assets/images/villagio.png';
+import Cone from '../assets/images/cone.png';
+import Crew from '../assets/images/crew.png';
+import Gelatocup from '../assets/images/gelatocup.png';
+import Cup from '../assets/images/cup.png'
+import Croissant from '../assets/images/kuasong.png';
+import BengawanCust from '../assets/images/bengawan-cust.png';
+import Maps from '../assets/images/maps.jpg';
+import Braga from '../assets/images/braga.png';
+import SMB from '../assets/images/smb.png';
 
-export { Hero, Gelato, Cookies, Choco, Blackforest, Blueberry, Bublegum, ChocoChashew, ChocoSorbet, CoffeeNut , Our, logo, Tsm, Bengawan, Villagio };
+export { Hero, Gelato, Cookies, Choco, Blackforest, Blueberry, Bublegum, ChocoChashew, ChocoSorbet, CoffeeNut , Our, logo, Tsm, Bengawan, Villagio, Cone, Crew, Gelatocup, Cup, Croissant, BengawanCust, Maps, Braga, SMB };
