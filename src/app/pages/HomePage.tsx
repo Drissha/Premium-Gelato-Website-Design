@@ -31,7 +31,7 @@ import { Link } from "react-router";
 
 export default function App() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-cream-50 via-pink-50/30 to-purple-reguler/30">
+    <div className="min-h-screen bg-gradient-to-br from-cream-50 via-pink-50/30 to-pink-reguler/30">
 
       {/* Hero Section */}
       <section
@@ -77,7 +77,7 @@ export default function App() {
             <h1 className="text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-extrabold mb-6 lg:mb-8 leading-[1.1] tracking-tight">
               Let's Go
               <br />
-              <span className="bg-gradient-to-r from-blue-reguler via-purple-reguler to-purple-reguler bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-blue-reguler via-red-200 to-pink-reguler bg-clip-text text-transparent">
                 Gelato!
               </span>
             </h1>
@@ -94,7 +94,7 @@ export default function App() {
                 <motion.button
                     whileHover={{ scale: 1.05, y: -2 }}
                     whileTap={{ scale: 0.95 }}
-                    className="cursor-pointer bg-gradient-to-r from-blue-reguler via-purple-200 to-pink-reguler bg-[length:200%_100%] hover:bg-right text-gray-700 px-8 lg:px-10 py-4 lg:py-5 rounded-full text-base lg:text-lg font-bold shadow-2xl shadow-pink-200/50 hover:shadow-pink-300/60 transition-all duration-500"
+                    className="cursor-pointer bg-gradient-to-r from-blue-reguler via-pink-200 to-pink-reguler bg-[length:200%_100%] hover:bg-right text-gray-700 px-8 lg:px-10 py-4 lg:py-5 rounded-full text-base lg:text-lg font-bold shadow-2xl shadow-pink-200/50 hover:shadow-pink-300/60 transition-all duration-500"
                 >
                     Our Products
                 </motion.button>
@@ -123,8 +123,8 @@ export default function App() {
                 { icon: BadgeCheck, label: "High Quality Local Ingredients" },
               ].map((stat, idx) => (
                 <div key={idx} className="text-center lg:text-left">
-                  <div className="inline-flex items-center justify-center w-12 h-12 rounded-2xl bg-gradient-to-br from-pink-reguler to-purple-200 mb-2 shadow-lg">
-                    <stat.icon className="text-pink-400" size={20} />
+                  <div className="inline-flex items-center justify-center w-12 h-12 rounded-2xl bg-gradient-to-br from-pink-reguler to-pink-200 mb-2 shadow-lg">
+                    <stat.icon className="text-pink-300" size={20} />
                   </div>
                   <p className="text-sm font-semibold text-gray-700">
                     {stat.label}
@@ -145,10 +145,10 @@ export default function App() {
             <div className="relative rounded-[3rem] overflow-hidden shadow-2xl shadow-pink-200/50">
               <ImageWithFallback
                 src={Hero}
-                alt="Delicious Italian gelato"
+                alt="Delicious gelato"
                 className="w-full h-[500px] lg:h-[650px] object-cover"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-pink-reguler/10 via-transparent to-purple-200/10" />
+              <div className="absolute inset-0 bg-gradient-to-t from-pink-reguler/10 via-transparent to-pink-200/10" />
             </div>
 
             {/* Floating Badge - 100% Natural */}
@@ -159,8 +159,8 @@ export default function App() {
               className="absolute -bottom-6 -left-6 bg-white/95 backdrop-blur-xl rounded-3xl p-6 shadow-2xl shadow-pink-200/50 max-w-[200px]"
             >
               <div className="flex items-center gap-4">
-                <div className="bg-gradient-to-br from-pink-reguler to-purple-200 rounded-2xl p-3.5">
-                  <Sparkles className="text-pink-400" size={28} />
+                <div className="bg-gradient-to-br from-pink-reguler to-pink-200 rounded-2xl p-3.5">
+                  <Sparkles className="text-pink-300" size={28} />
                 </div>
                 <div>
                   <p className="font-extrabold text-lg text-gray-800">
@@ -176,11 +176,11 @@ export default function App() {
               initial={{ scale: 0 }}
               animate={{ scale: 1 }}
               transition={{ delay: 1, type: "spring", stiffness: 200 }}
-              className="absolute -top-6 -right-6 bg-white/95 backdrop-blur-xl rounded-3xl p-5 shadow-2xl shadow-purple-200/50"
+              className="absolute -top-6 -right-6 bg-white/95 backdrop-blur-xl rounded-3xl p-5 shadow-2xl shadow-pink-200/50"
             >
               <div className="text-center">
-                <div className="bg-gradient-to-br from-purple-reguler to-blue-200 rounded-2xl p-3 mb-2 inline-block">
-                  <Clock className="text-purple-400" size={24} />
+                <div className="bg-gradient-to-br from-pink-reguler to-blue-200 rounded-2xl p-3 mb-2 inline-block">
+                  <Clock className="text-pink-300" size={24} />
                 </div>
                 <p className="font-extrabold text-sm text-gray-800">
                   Fresh Daily
@@ -189,7 +189,7 @@ export default function App() {
             </motion.div>
 
             {/* Decorative Elements */}
-            <div className="absolute -z-10 -top-10 -right-10 w-72 h-72 bg-gradient-to-br from-pink-reguler/30 to-purple-200/30 rounded-full blur-3xl" />
+            <div className="absolute -z-10 -top-10 -right-10 w-72 h-72 bg-gradient-to-br from-pink-reguler/30 to-pink-200/30 rounded-full blur-3xl" />
             <div className="absolute -z-10 -bottom-10 -left-10 w-64 h-64 bg-gradient-to-br from-blue-reguler/30 to-cyan-200/30 rounded-full blur-3xl" />
           </motion.div>
         </div>
@@ -226,7 +226,7 @@ export default function App() {
                 description:
                   "Scoop up happiness with every bite of our Gelato Cups, made with the freshest milk for that irresistibly smooth and creamy texture. Packed with natural ingredients, each cup is bursting with pure, authentic flavors that will have you smiling from the first spoonful to the last.",
                 image: Gelato,
-                gradient: "from-pink-reguler via-purple-reguler to-rose-200",
+                gradient: "from-blue-reguler via-blue-200 to-rose-200",
                 shadowColor: "shadow-pink-200/50",
               },
               {
@@ -236,8 +236,8 @@ export default function App() {
                   "Get ready for a bite of pure happiness with our delicious mix of cookies, croissants, and other delightful pastries! From the buttery, flaky goodness of our croissants to the sweet crunch of our cookies, every bite is a celebration of flavor. Perfect for sharing (or keeping all to yourself).",
                 image: Cookies,
                 gradient:
-                  "from-purple-reguler via-purple-reguler to-violet-300",
-                shadowColor: "shadow-purple-200/50",
+                  "from-pink-200 via-pink-reguler to-rose-200",
+                shadowColor: "shadow-pink-200/50",
               },
               {
                 icon: Candy,
@@ -277,14 +277,14 @@ export default function App() {
 
                 {/* Content */}
                 <div className="p-7">
-                  <h3 className="text-2xl lg:text-3xl font-extrabold mb-2 text-gray-800">
+                  <h3 className="text-2xl text-blue-reguler lg:text-3xl font-extrabold mb-2 text-gray-800">
                     {category.title}
                   </h3>
                   <p className="text-gray-600 mb-5 text-sm lg:text-base">
                     {category.description}
                   </p>
                   <button
-                    className={`text-transparent bg-gradient-to-r ${category.gradient} bg-clip-text font-bold text-base group-hover:underline transition-all`}
+                    className={`bg-gradient-to-r text-pink-300 bg-clip-text font-bold text-base group-hover:underline transition-all`}
                   >
                     Explore Collection →
                   </button>
@@ -301,7 +301,7 @@ export default function App() {
       </section>
 
       {/* Best Sellers Carousel */}
-      <section className="py-20 lg:py-32 bg-gradient-to-br from-white/60 via-pink-50/40 to-purple-reguler/40 backdrop-blur-sm">
+      <section className="py-20 lg:py-32 bg-gradient-to-br from-white/60 via-pink-50/40 to-pink-reguler/40 backdrop-blur-sm">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -348,7 +348,7 @@ export default function App() {
               </div>
 
               {/* Decorative blob */}
-              <div className="absolute -z-10 -bottom-10 -left-10 w-64 h-64 bg-gradient-to-br from-pink-200/40 to-purple-200/40 rounded-full blur-3xl" />
+              <div className="absolute -z-10 -bottom-10 -left-10 w-64 h-64 bg-gradient-to-br from-pink-200/40 to-pink-200/40 rounded-full blur-3xl" />
             </motion.div>
 
             {/* Content Side */}
@@ -364,7 +364,7 @@ export default function App() {
               <h2 className="text-4xl lg:text-6xl font-extrabold mb-6 lg:mb-8 text-gray-800 leading-tight">
                 About
                 <br />
-                <span className="bg-gradient-to-r from-blue-reguler via-purple-reguler to-pink-reguler bg-clip-text text-transparent">
+                <span className="bg-gradient-to-r from-blue-reguler via-pink-reguler to-pink-reguler bg-clip-text text-transparent">
                   Let's go Gelato
                 </span>
               </h2>
@@ -390,7 +390,7 @@ export default function App() {
               <motion.button
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
-                className={`w-full from-blue-reguler via-purple-reguler to-pink-reguler bg-gradient-to-r text-gray-700 py-4 rounded-2xl font-bold shadow-lg hover:shadow-xl transition-all duration-300 text-sm lg:text-base`}
+                className={`w-full from-blue-reguler via-pink-reguler to-pink-reguler bg-gradient-to-r text-gray-700 py-4 rounded-2xl font-bold shadow-lg hover:shadow-xl transition-all duration-300 text-sm lg:text-base`}
               >
                 Learn More
               </motion.button>
@@ -410,7 +410,7 @@ export default function App() {
                     transition={{ delay: idx * 0.1, type: 'spring' }}
                     className="text-center bg-white/80 backdrop-blur-sm rounded-2xl p-5 shadow-lg"
                   >
-                    <p className="text-3xl lg:text-5xl font-extrabold bg-gradient-to-r from-purple-200 via-purple-reguler to-pink-reguler bg-clip-text text-transparent [background-clip:text] [-webkit-background-clip:text] [-webkit-text-fill-color:transparent] mb-1">
+                    <p className="text-3xl lg:text-5xl font-extrabold bg-gradient-to-r from-pink-200 via-pink-reguler to-pink-reguler bg-clip-text text-transparent [background-clip:text] [-webkit-background-clip:text] [-webkit-text-fill-color:transparent] mb-1">
                       {stat.number}
                     </p>
                     <p className="text-gray-600 text-xs lg:text-sm font-semibold">{stat.label}</p>
@@ -426,7 +426,7 @@ export default function App() {
       {/* Locations */}
       <section
         id="locations"
-        className="py-20 lg:py-32 bg-gradient-to-br from-white/60 via-purple-50/40 to-pink-reguler/40"
+        className="py-20 lg:py-32 bg-gradient-to-br from-white/60 via-pink-50/40 to-pink-reguler/40"
       >
         <div className="max-w-7xl mx-auto px-6 lg:px-8 w-full text-center">
           <motion.div
@@ -457,7 +457,7 @@ export default function App() {
 
                 image:
                   Tsm,
-                gradient: "from-blue-reguler via-purple-reguler to-pink-reguler",
+                gradient: "from-blue-reguler via-pink-reguler to-pink-reguler",
               },
               {
                 city: "Bengawan | Bandung",
@@ -466,7 +466,7 @@ export default function App() {
 
                 image:
                   Bengawan,
-                gradient: "from-blue-reguler via-purple-reguler to-pink-reguler",
+                gradient: "from-blue-reguler via-pink-reguler to-pink-reguler",
               },
               {
                 city: "Villagio | Karawang",
@@ -476,7 +476,7 @@ export default function App() {
 
                 image:
                   Villagio,
-                gradient: "from-blue-reguler via-purple-reguler to-pink-reguler",
+                gradient: "from-blue-reguler via-pink-reguler to-pink-reguler",
               },
             ].map((location, idx) => (
               <div
@@ -518,7 +518,7 @@ export default function App() {
                   <motion.button
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
-                    className={`w-full border-2 border-blue-reguler text-pink-400 py-4 rounded-2xl font-bold shadow-lg hover:shadow-xl transition-all duration-300 text-sm lg:text-base`}
+                    className={`w-full border-2 border-blue-reguler text-pink-300 py-4 rounded-2xl font-bold shadow-lg hover:shadow-xl transition-all duration-300 text-sm lg:text-base`}
                   >
                     Get Directions
                   </motion.button>
@@ -547,7 +547,7 @@ export default function App() {
       {/* Footer */}
       <footer className="relative bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-white py-16 lg:py-20 overflow-hidden">
         {/* Decorative elements */}
-        <div className="absolute top-0 left-0 w-96 h-96 bg-gradient-to-br from-pink-reguler/10 to-purple-200/10 rounded-full blur-3xl" />
+        <div className="absolute top-0 left-0 w-96 h-96 bg-gradient-to-br from-pink-reguler/10 to-pink-200/10 rounded-full blur-3xl" />
         <div className="absolute bottom-0 right-0 w-96 h-96 bg-gradient-to-br from-blue-reguler/10 to-cyan-200/10 rounded-full blur-3xl" />
 
         <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
@@ -569,7 +569,7 @@ export default function App() {
                     whileHover={{ scale: 1.1, y: -2 }}
                     whileTap={{ scale: 0.9 }}
                     href="#"
-                    className="bg-white/10 backdrop-blur-md rounded-2xl p-3.5 hover:bg-gradient-to-br hover:from-pink-reguler hover:to-purple-200 transition-all duration-300 shadow-lg"
+                    className="bg-white/10 backdrop-blur-md rounded-2xl p-3.5 hover:bg-gradient-to-br hover:from-pink-reguler hover:to-pink-200 transition-all duration-300 shadow-lg"
                   >
                     <Icon size={20} />
                   </motion.a>
@@ -632,7 +632,7 @@ export default function App() {
                 <motion.button
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
-                  className="bg-gradient-to-r from-pink-reguler to-purple-200 px-6 py-3.5 rounded-2xl font-bold shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center gap-2 text-gray-700"
+                  className="bg-gradient-to-r from-pink-reguler to-pink-200 px-6 py-3.5 rounded-2xl font-bold shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center gap-2 text-gray-700"
                 >
                   <Mail size={18} />
                   Subscribe

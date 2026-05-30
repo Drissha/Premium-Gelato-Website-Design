@@ -1,7 +1,7 @@
 :root{
-    --color-blue-reguler: oklch(73.2% 0.117 220.5);
+    --color-blue-reguler: #3cb9db;
     --color-pink-reguler: oklch(93.1% 0.028 16.8);
-    --color-purple-reguler: oklch(88.2% 0.041 321.4);
+    --color-red-200: #e5d0e9;
 }
 
 .to-blue-reguler {
@@ -12,8 +12,8 @@
     --tw-gradient-to: var(--color-pink-reguler);
     --tw-gradient-stops: var(--tw-gradient-via-stops);
 }
-.to-purple-reguler {
-    --tw-gradient-to: var(--color-purple-reguler);
+.to-red-200 {
+    --tw-gradient-to: var(--color-red-200);
     --tw-gradient-stops: var(--tw-gradient-via-stops);
 }
 
@@ -25,13 +25,13 @@
     --tw-gradient-from: var(--color-pink-reguler);
     --tw-gradient-stops: var(--tw-gradient-via-stops);
 }
-.from-purple-reguler {
-    --tw-gradient-from: var(--color-purple-reguler);
+.from-red-200 {
+    --tw-gradient-from: var(--color-red-200);
     --tw-gradient-stops: var(--tw-gradient-via-stops);
 }
 
-.via-purple-reguler {
-    --tw-gradient-via: var(--color-purple-reguler);
+.via-red-200 {
+    --tw-gradient-via: var(--color-red-200);
     --tw-gradient-via-stops: var(--tw-gradient-position), var(--tw-gradient-from) var(--tw-gradient-from-position), var(--tw-gradient-via) var(--tw-gradient-via-position), var(--tw-gradient-to) var(--tw-gradient-to-position);
     --tw-gradient-stops: var(--tw-gradient-via-stops);
 }
@@ -49,8 +49,8 @@
 .text-pink-reguler {
     color: var(--color-pink-reguler);
 }
-.text-purple-reguler {
-    color: var(--color-purple-reguler);
+.text-red-200 {
+    color: var(--color-red-200);
 }
 .text-blue-reguler {
     color: var(--color-blue-reguler);

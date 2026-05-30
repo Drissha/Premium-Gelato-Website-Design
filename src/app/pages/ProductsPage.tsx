@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Search, SlidersHorizontal, Star, Plus } from 'lucide-react';
 import { ImageWithFallback } from '../components/figma/ImageWithFallback';
+import { useOrderModal } from "../components/useOrderModal";
 
 const categories = ['All', 'Gelato', 'Pastry', 'Chocolate'];
 const PRODUCTS_PER_PAGE = 8;
@@ -195,6 +196,7 @@ export function ProductsPage() {
   const [searchQuery, setSearchQuery] = useState('');
   const [sortBy, setSortBy] = useState('popular');
   const [visibleCount, setVisibleCount] = useState(PRODUCTS_PER_PAGE);
+  const { openModal } = useOrderModal();
 
   const availableSubCategories = useMemo(() => {
     const productsInCategory =
@@ -274,7 +276,7 @@ export function ProductsPage() {
         >
           <h1 className="text-4xl lg:text-6xl font-extrabold mb-4 text-gray-800">
             Our Premium
-            <span className="bg-gradient-to-r from-pink-300 via-purple-300 to-blue-300 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-blue-reguler via-pink-reguler to-pink-200 bg-clip-text text-transparent">
               {' '}Collection
             </span>
           </h1>
@@ -341,7 +343,7 @@ export function ProductsPage() {
                   whileTap={{ scale: 0.95 }}
                   className={`px-6 lg:px-8 py-3 lg:py-3.5 rounded-full font-semibold transition-all duration-300 ${
                     activeCategory === category
-                      ? 'bg-gradient-to-r from-pink-200 to-purple-200 text-gray-700 shadow-xl shadow-pink-200/50'
+                      ? 'bg-gradient-to-r from-blue-reguler via-blue-300 to-blue-200 text-gray-700 shadow-xl shadow-pink-200/50'
                       : 'bg-white/80 backdrop-blur-md text-gray-600 hover:bg-white shadow-lg hover:shadow-xl'
                   }`}
                 >
@@ -371,7 +373,7 @@ export function ProductsPage() {
                   whileTap={{ scale: 0.95 }}
                   className={`px-5 py-2.5 rounded-full font-semibold transition-all duration-300 ${
                     activeSubCategory === subCategory
-                      ? 'bg-gradient-to-r from-purple-200 to-pink-200 text-gray-700 shadow-xl shadow-purple-200/50'
+                      ? 'bg-gradient-to-r from-blue-reguler via-blue-300 to-blue-200 text-gray-700 shadow-xl shadow-red-200/50'
                       : 'bg-white/80 backdrop-blur-md text-gray-600 hover:bg-white shadow-lg hover:shadow-xl'
                   }`}
                 >
@@ -388,7 +390,7 @@ export function ProductsPage() {
           animate={{ opacity: 1 }}
           className="mb-6 text-gray-600"
         >
-          Showing <span className="font-bold text-pink-300">{filteredProducts.length}</span> products
+          Showing <span className="font-bold text-blue-reguler">{filteredProducts.length}</span> products
         </motion.div>
 
         {/* Product Grid */}
@@ -436,7 +438,7 @@ export function ProductsPage() {
                   <motion.button
                     initial={{ opacity: 0, scale: 0.8 }}
                     whileHover={{ scale: 1.05 }}
-                    className="absolute bottom-4 right-4 bg-gradient-to-r from-pink-200 to-purple-200 text-gray-700 p-3 rounded-2xl shadow-xl opacity-0 group-hover:opacity-100 transition-all duration-300"
+                    className="absolute bottom-4 right-4 bg-gradient-to-r from-pink-200 to-red-200 text-gray-700 p-3 rounded-2xl shadow-xl opacity-0 group-hover:opacity-100 transition-all duration-300"
                   >
                     <Plus size={20} strokeWidth={3} />
                   </motion.button>
@@ -444,14 +446,14 @@ export function ProductsPage() {
 
                 {/* Product Info */}
                 <div className="p-6">
-                  <div className="mb-2">
-                    <span className="text-xs font-semibold text-pink-300 uppercase tracking-wider">
+                  <div className="mb-2 flex items-center">
+                    <span className="text-xs font-semibold text-blue-reguler uppercase tracking-wider">
                       {Array.isArray(product.category)
                         ? product.category.join(' • ')
                         : product.category}
                     </span>
                     {product.subcategory && (
-                      <span className="mt-2 inline-flex rounded-full bg-purple-100/80 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.2em] text-purple-700">
+                      <span className="mt-2 ms-auto inline-flex rounded-full bg-blue-100/80 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.2em] text-blue-reguler">
                         {product.subcategory}
                       </span>
                     )}
@@ -460,13 +462,14 @@ export function ProductsPage() {
                   <p className="text-gray-600 text-sm mb-4 line-clamp-2">{product.description}</p>
 
                   <div className="flex items-center justify-between">
-                    <span className="text-2xl font-extrabold bg-gradient-to-r from-pink-300 to-purple-300 bg-clip-text text-transparent">
+                    <span className="text-2xl font-extrabold bg-gradient-to-r from-pink-300 to-rose-200 bg-clip-text text-transparent">
                       {product.price}
                     </span>
                     <motion.button
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}
-                      className="bg-gradient-to-r from-pink-200 to-purple-200 text-gray-700 px-5 py-2 rounded-full text-sm font-bold shadow-lg hover:shadow-xl transition-all duration-300"
+                      onClick={openModal}
+                      className="cursor-pointer bg-gradient-to-r from-pink-200 via-pink-reguler to-rose-200 text-gray-700 px-5 py-2 rounded-full text-sm font-bold shadow-lg hover:shadow-xl transition-all duration-300"
                     >
                       Order Now
                     </motion.button>

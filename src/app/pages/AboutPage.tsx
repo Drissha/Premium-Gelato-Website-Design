@@ -4,6 +4,7 @@ import { Heart, Leaf, Users, Award, Sparkles, MapPin, ChevronRight, Quote } from
 import { Link } from 'react-router';
 import { Bengawan, BengawanCust, Cone, Crew, Croissant, Cup, Gelatocup, Villagio } from '../imageImports';
 
+
 const timelineEvents = [
   {
     content: 'CONCEPT',
@@ -41,13 +42,13 @@ const timelineEvents = [
 
 export function AboutPage() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-cream-50 via-pink-50/30 to-purple-50/30 pt-24 pb-20">
+    <div className="min-h-screen bg-gradient-to-br from-cream-50 via-pink-50/30 to-blue-50/30 pt-24 pb-20">
       {/* Hero Section */}
       <section className="relative py-20 lg:py-32 overflow-hidden">
         {/* Floating Shapes */}
         <div className="absolute inset-0 pointer-events-none overflow-hidden">
           <motion.div
-            className="absolute top-20 left-10 w-72 h-72 bg-gradient-to-br from-pink-200/30 to-purple-200/20 rounded-full blur-3xl"
+            className="absolute top-20 left-10 w-72 h-72 bg-gradient-to-br from-pink-200/30 to-red-200/20 rounded-full blur-3xl"
             animate={{ y: [0, 30, 0], x: [0, 20, 0] }}
             transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
           />
@@ -78,7 +79,7 @@ export function AboutPage() {
             <h1 className="text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-extrabold mb-8 leading-[1.1] tracking-tight">
               Happiness
               <br />
-              <span className="bg-gradient-to-r from-pink-300 via-purple-300 to-blue-300 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-blue-reguler via-rose-200 to-pink-200 bg-clip-text text-transparent">
                 in Every Scoop
               </span>
             </h1>
@@ -100,7 +101,7 @@ export function AboutPage() {
               alt="Gelato Crew"
               className="w-full sm:h-[300px] lg:h-[600px] object-cover"
             /> */}
-            <div className="absolute inset-0 bg-gradient-to-t from-pink-200/20 via-transparent to-purple-200/10" />
+            <div className="absolute inset-0 bg-gradient-to-t from-pink-200/20 via-transparent to-red-200/10" />
           </motion.div>
         </div>
       </section>
@@ -116,7 +117,7 @@ export function AboutPage() {
               transition={{ duration: 0.8 }}
               className="relative"
             >
-              <div className="relative rounded-[3rem] overflow-hidden shadow-2xl shadow-purple-200/50">
+              <div className="relative rounded-[3rem] overflow-hidden shadow-2xl shadow-red-200/50">
                 <ImageWithFallback
                   src={Villagio}
                   alt="Hero-about"
@@ -147,7 +148,7 @@ export function AboutPage() {
               <h2 className="text-4xl lg:text-6xl font-extrabold mb-6 text-gray-800 leading-tight">
                 A Dream Scooped 
                 <br />
-                <span className="bg-gradient-to-r from-pink-300 to-purple-300 bg-clip-text text-transparent">
+                <span className="bg-gradient-to-r from-blue-reguler via-blue-300 to-blue-200 bg-clip-text text-transparent">
                   into Reality
                 </span>
               </h2>
@@ -163,7 +164,7 @@ export function AboutPage() {
       </section>
 
       {/* Timeline Section */}
-      <section className="py-20 lg:py-32 bg-gradient-to-br from-white/60 via-purple-50/40 to-pink-50/40">
+      <section className="py-20 lg:py-32 bg-gradient-to-br from-white/60 via-blue-50/40 to-pink-50/40">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -171,7 +172,7 @@ export function AboutPage() {
             viewport={{ once: true }}
             className="text-center mb-16 lg:mb-20"
           >
-            <span className="inline-block text-sm font-bold text-purple-300 tracking-wider uppercase mb-4">
+            <span className="inline-block text-sm font-bold text-pink-300 tracking-wider uppercase mb-4">
               Our Journey
             </span>
             <h2 className="text-4xl lg:text-6xl font-extrabold mb-5 text-gray-800">
@@ -207,10 +208,10 @@ export function AboutPage() {
 
                 <div className={idx % 2 === 1 ? 'lg:order-1' : ''}>
                   <div className="bg-white/80 backdrop-blur-sm rounded-3xl p-8 lg:p-10 shadow-xl">
-                    <div className="inline-block bg-gradient-to-r from-pink-200 to-purple-200 text-gray-700 px-6 py-2 rounded-full font-bold text-lg mb-6">
+                    <div className="inline-block bg-gradient-to-r from-pink-200 via-pink-reguler to-red-200 text-gray-700 px-6 py-2 rounded-full font-bold text-lg mb-6">
                       {event.content}
                     </div>
-                    <h3 className="text-3xl lg:text-4xl font-extrabold mb-4 text-gray-800">
+                    <h3 className="text-3xl lg:text-4xl font-extrabold mb-4 text-gray-800 bg-gradient-to-r from-blue-reguler via-blue-300 to-blue-200 bg-clip-text text-transparent ">
                       {event.title}
                     </h3>
                     <p className="text-gray-600 text-lg leading-relaxed">
@@ -233,7 +234,7 @@ export function AboutPage() {
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="relative bg-gradient-to-br from-pink-200 via-purple-200 to-blue-200 rounded-[3rem] p-12 lg:p-16 text-center overflow-hidden shadow-2xl"
+            className="relative bg-gradient-to-br from-blue-reguler via-blue-200 to-pink-200 rounded-[3rem] p-12 lg:p-16 text-center overflow-hidden shadow-2xl"
           >
             {/* Decorative blobs */}
             <div className="absolute top-0 right-0 w-64 h-64 bg-white/20 rounded-full blur-3xl" />

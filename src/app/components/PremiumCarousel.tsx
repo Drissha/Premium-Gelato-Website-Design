@@ -21,7 +21,7 @@ const bestSellers = [
     image: Blackforest,
     rating: 4.9,
     price: "$7.50",
-    color: "from-pink-reguler via-purple-reguler to-purple-reguler",
+    color: "from-pink-reguler via-red-200 to-red-200",
   },
   {
     id: 2,
@@ -30,7 +30,7 @@ const bestSellers = [
     image: Blueberry,
     rating: 5.0,
     price: "$6.50",
-    color: "from-purple-reguler via-purple-reguler to-pink-reguler",
+    color: "from-red-200 via-red-200 to-pink-reguler",
   },
   {
     id: 3,
@@ -60,7 +60,7 @@ const bestSellers = [
     image: ChocoSorbet,
     rating: 4.9,
     price: "$6.50",
-    color: "from-pink-reguler via-pink-reguler to-purple-reguler",
+    color: "from-pink-reguler via-pink-reguler to-red-200",
   },
   {
     id: 6,
@@ -69,7 +69,7 @@ const bestSellers = [
     image: CoffeeNut,
     rating: 4.6,
     price: "$6.00",
-    color: "from-purple-reguler via-purple-reguler to-pink-reguler",
+    color: "from-red-200 via-red-200 to-pink-reguler",
   },
 ];
 
@@ -210,7 +210,7 @@ export function PremiumCarousel() {
               <div
                 className={`h-2.5 rounded-full transition-all duration-300 ${
                   idx === currentIndex
-                    ? "w-10 bg-gradient-to-r from-pink-reguler to-purple-200"
+                    ? "w-10 bg-gradient-to-r from-pink-reguler to-red-200"
                     : "w-2.5 bg-gray-300 group-hover:bg-pink-200"
                 }`}
               />

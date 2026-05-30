@@ -35,7 +35,7 @@ export function ScrollToTop() {
           whileHover={{ scale: 1.1, y: -2 }}
           whileTap={{ scale: 0.9 }}
           onClick={scrollToTop}
-          className="fixed bottom-8 right-8 z-50 bg-gradient-to-r from-pink-reguler via-purple-reguler to-purple-200 text-gray-700 p-4 rounded-2xl shadow-2xl shadow-pink-200/50 hover:shadow-pink-300/60 transition-all duration-300"
+          className="fixed bottom-8 right-8 z-50 bg-gradient-to-r from-pink-reguler via-red-200 to-red-200 text-gray-700 p-4 rounded-2xl shadow-2xl shadow-pink-200/50 hover:shadow-pink-300/60 transition-all duration-300"
         >
           <ChevronUp size={24} />
         </motion.button>

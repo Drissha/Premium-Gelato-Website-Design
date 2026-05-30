@@ -5,6 +5,7 @@ import  HomePage  from './pages/HomePage';
 import { ProductsPage } from './pages/ProductsPage';
 import { AboutPage } from './pages/AboutPage';
 import { LocationsPage } from './pages/LocationsPage';
+import OrderModal from "./components/ModalOrder";
 
 export default function App() {
   return (
@@ -19,6 +20,7 @@ export default function App() {
           <Route path="/about" element={<AboutPage />} />
           <Route path="/locations" element={<LocationsPage />} />
         </Routes>
+        <OrderModal />
       </div>
     </BrowserRouter>
   );

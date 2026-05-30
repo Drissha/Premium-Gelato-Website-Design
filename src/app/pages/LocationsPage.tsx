@@ -116,8 +116,8 @@ export function LocationsPage() {
           <div className="absolute inset-0 opacity-30" style={{ backgroundImage: 'radial-gradient(circle at 20% 20%, rgba(56,189,248,0.18) 0 14px, transparent 15px), radial-gradient(circle at 80% 30%, rgba(99,102,241,0.18) 0 16px, transparent 17px), linear-gradient(rgba(148,163,184,0.08) 1px, transparent 1px), linear-gradient(90deg, rgba(148,163,184,0.08) 1px, transparent 1px)', backgroundSize: '40px 40px, 44px 44px, 30px 30px, 30px 30px' }} />
           <div className="relative z-10 grid items-center gap-10 lg:grid-cols-[1.1fr_0.9fr]">
             <div className="space-y-6">
-              <span className="inline-flex items-center gap-2 rounded-full bg-white/90 px-4 py-2 text-sm font-semibold text-blue-reguler shadow-md shadow-blue-100/70">
-                <Sparkles size={16} /> Store Location
+              <span className="inline-flex items-center gap-2 rounded-full bg-white/90 px-4 py-2 text-sm font-semibold shadow-md shadow-blue-100/70">
+                <Sparkles size={16} className="text-pink-300" /> Store Location
               </span>
               <h1 className="max-w-xl text-4xl font-black tracking-tight text-gray-800 lg:text-6xl">
                 Find Your Nearest Gelato Shop.
@@ -126,7 +126,7 @@ export function LocationsPage() {
                 Discover our artisanal gelato cafe locations, opening hours, facilities, and the perfect place to enjoy your next sweet escape.
               </p>
               <div className="flex flex-wrap gap-3">
-                <button className="rounded-full bg-gradient-to-r from-pink-reguler via-blue-reguler to-blue-reguler px-6 py-3 text-sm font-semibold text-gray-700 shadow-lg shadow-blue-100/70">View Menu</button>
+                <button className="rounded-full bg-gradient-to-r from-pink-200 via-pink-reguler to-rose-200 px-6 py-3 text-sm font-semibold text-gray-700 shadow-lg shadow-blue-100/70">View Menu</button>
               </div>
             </div>
 
@@ -158,7 +158,7 @@ export function LocationsPage() {
           >
             <div className="mb-6 flex items-center justify-between gap-3">
               <div>
-                <p className="text-sm uppercase tracking-[0.25em] text-blue-reguler">Store Locations</p>
+                <p className="text-sm text-blue-reguler">Store Locations</p>
                 <h2 className="text-2xl font-bold text-gray-800">Search and filter locations</h2>
               </div>
             </div>
@@ -184,7 +184,7 @@ export function LocationsPage() {
                   onClick={() => setCityFilter(city)}
                   className={`rounded-full px-4 py-2 text-sm font-semibold transition ${
                     cityFilter === city
-                      ? 'bg-gradient-to-r from-pink-reguler via-blue-reguler to-blue-reguler text-gray-800 shadow-lg shadow-blue-100/70'
+                      ? 'bg-gradient-to-r from-blue-reguler via-blue-300 to-blue-200 text-gray-800 shadow-lg shadow-blue-100/70'
                       : 'bg-pink-reguler/15 text-gray-700 hover:bg-pink-reguler/25'
                   }`}
                 >
@@ -204,10 +204,10 @@ export function LocationsPage() {
           >
             <div className="mb-6 flex items-center justify-between gap-3">
               <div>
-                <p className="text-sm uppercase tracking-[0.25em] text-blue-reguler">Featured Store</p>
+                <p className="text-sm text-blue-reguler">Featured Store</p>
                 <h2 className="text-2xl font-bold text-gray-800">{stores[featuredStoreIndex].name}</h2>
               </div>
-              <span className="rounded-full bg-gradient-to-r from-pink-reguler/25 to-blue-reguler/20 px-3 py-1 text-xs font-semibold text-gray-700">Most loved</span>
+              <span className="rounded-full bg-gradient-to-r from-pink-reguler/25 to-blue-reguler/20 px-3 py-1 text-xs font-semibold text-pink-300">Most loved</span>
             </div>
             <div className="grid gap-6 lg:grid-cols-[1fr_0.9fr] items-center">
               <img src={stores[featuredStoreIndex].image} alt={stores[featuredStoreIndex].name} className="h-64 w-full rounded-[1.5rem] object-cover shadow-xl" />
@@ -222,7 +222,7 @@ export function LocationsPage() {
                   href={stores[featuredStoreIndex].directionLink}
                   target="_blank"
                   rel="noreferrer"
-                  className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-pink-reguler via-blue-reguler to-blue-reguler px-5 py-3 text-sm font-semibold text-gray-700 shadow-lg shadow-blue-100/70"
+                  className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-blue-reguler via-blue-300 to-blue-200 px-5 py-3 text-sm font-semibold text-gray-700 shadow-lg shadow-blue-100/70"
                 >
                   Get directions <ArrowRight size={16} />
                 </a>
@@ -246,7 +246,7 @@ export function LocationsPage() {
               <img src={store.image} alt={store.name} className="h-44 w-full rounded-[1.4rem] object-cover" />
               <div className="mt-4 flex items-center justify-between gap-2">
                 <span className="rounded-full bg-pink-reguler/15 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.24em] text-blue-reguler">{store.city}</span>
-                <span className="text-xs text-gray-500">{store.area}</span>
+                <span className="text-xs text-pink-300">{store.area}</span>
               </div>
               <h3 className="mt-3 text-xl font-bold text-gray-800">{store.name}</h3>
               <p className="mt-2 text-sm text-gray-600">{store.highlight}</p>
@@ -258,7 +258,7 @@ export function LocationsPage() {
                 href={store.directionLink}
                 target="_blank"
                 rel="noreferrer"
-                className="mt-5 inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-pink-reguler via-blue-reguler to-blue-reguler px-5 py-3 text-sm font-semibold text-gray-700 shadow-lg shadow-blue-100/70"
+                className="mt-5 inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-blue-reguler via-blue-300 to-blue-200 px-5 py-3 text-sm font-semibold text-gray-700 shadow-lg shadow-blue-100/70"
               >
                 Directions <ArrowRight size={15} />
               </a>

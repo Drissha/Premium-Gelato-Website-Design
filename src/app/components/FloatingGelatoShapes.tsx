@@ -18,7 +18,7 @@ export function FloatingGelatoShapes() {
         }}
       />
       <motion.div
-        className="absolute top-1/4 right-10 w-80 h-80 bg-gradient-to-br from-purple-reguler/40 to-blue-200/30 rounded-full blur-3xl"
+        className="absolute top-1/4 right-10 w-80 h-80 bg-gradient-to-br from-red-200/40 to-blue-200/30 rounded-full blur-3xl"
         animate={{
           y: [0, -50, 0],
           x: [0, -25, 0],

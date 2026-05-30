@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router';
 import { ShoppingBag, Menu, X, Sparkles } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
+import { useOrderModal } from "../components/useOrderModal";
 // @ts-ignore
 import logo from '../../assets/images/logo.png';
 
@@ -10,6 +11,7 @@ export function GelatoNavbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const location = useLocation();
   const isHomePage = location.pathname === '/';
+  const { openModal } = useOrderModal();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -53,38 +55,41 @@ export function GelatoNavbar() {
               className="relative text-gray-700 hover:text-pink-300 transition-all duration-300 font-medium group"
             >
               Home
-              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-pink-200 to-purple-200 group-hover:w-full transition-all duration-300" />
+              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-pink-200 to-red-200 group-hover:w-full transition-all duration-300" />
             </Link>
             <Link
               to="/products"
               className="relative text-gray-700 hover:text-pink-300 transition-all duration-300 font-medium group"
             >
               Products
-              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-pink-200 to-purple-200 group-hover:w-full transition-all duration-300" />
+              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-pink-200 to-red-200 group-hover:w-full transition-all duration-300" />
             </Link>
             <Link
               to="/about"
               className="relative text-gray-700 hover:text-pink-300 transition-all duration-300 font-medium group"
             >
               About
-              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-pink-200 to-purple-200 group-hover:w-full transition-all duration-300" />
+              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-pink-200 to-red-200 group-hover:w-full transition-all duration-300" />
             </Link>
             <Link
               to="/locations"
               className="relative text-gray-700 hover:text-pink-300 transition-all duration-300 font-medium group"
             >
               Locations
-              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-pink-200 to-purple-200 group-hover:w-full transition-all duration-300" />
+              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-pink-200 to-red-200 group-hover:w-full transition-all duration-300" />
             </Link>
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="flex items-center gap-2 bg-gradient-to-r from-pink-200 via-purple-200 to-pink-200 bg-[length:200%_100%] hover:bg-right text-gray-700 px-6 lg:px-8 py-3 rounded-full shadow-lg shadow-pink-200/50 hover:shadow-xl hover:shadow-pink-300/60 transition-all duration-300"
+              onClick={openModal}
+              className="flex items-center gap-2 bg-gradient-to-r from-blue-reguler via-pink-200 to-pink-reguler bg-[length:200%_100%] hover:bg-right text-gray-700 px-6 lg:px-8 py-3 rounded-full shadow-lg shadow-pink-200/50 hover:shadow-xl hover:shadow-pink-300/60 transition-all duration-300"
             >
               <ShoppingBag size={18} />
               <span>Order Now</span>
             </motion.button>
           </div>
+
+          
 
           {/* Mobile Menu Button */}
           <button
@@ -130,7 +135,7 @@ export function GelatoNavbar() {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.4 }}
-                  className="flex items-center justify-center gap-2 bg-gradient-to-r from-pink-reguler via-purple-reguler to-purple-200 text-gray-700 px-6 py-3 rounded-full shadow-lg mt-2"
+                  className="flex items-center justify-center gap-2 bg-gradient-to-r from-pink-reguler via-red-200 to-pink-200 text-gray-700 px-6 py-3 rounded-full shadow-lg mt-2"
                 >
                   <ShoppingBag size={18} />
                   Order Now

@@ -22,5 +22,9 @@ import BengawanCust from '../assets/images/bengawan-cust.png';
 import Maps from '../assets/images/maps.jpg';
 import Braga from '../assets/images/braga.png';
 import SMB from '../assets/images/smb.png';
+import WA from '../assets/images/wa.png';
+import Tokopedia from '../assets/images/tokped.png';
+import Shopee from '../assets/images/shopee.png';
+import Gojek from '../assets/images/gojek.png';
 
-export { Hero, Gelato, Cookies, Choco, Blackforest, Blueberry, Bublegum, ChocoChashew, ChocoSorbet, CoffeeNut , Our, logo, Tsm, Bengawan, Villagio, Cone, Crew, Gelatocup, Cup, Croissant, BengawanCust, Maps, Braga, SMB };
+export { Hero, Gelato, Cookies, Choco, Blackforest, Blueberry, Bublegum, ChocoChashew, ChocoSorbet, CoffeeNut , Our, logo, Tsm, Bengawan, Villagio, Cone, Crew, Gelatocup, Cup, Croissant, BengawanCust, Maps, Braga, SMB, WA, Tokopedia, Shopee, Gojek };
