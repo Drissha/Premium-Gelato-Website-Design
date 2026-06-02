@@ -5,6 +5,8 @@ import  HomePage  from './pages/HomePage';
 import { ProductsPage } from './pages/ProductsPage';
 import { AboutPage } from './pages/AboutPage';
 import { LocationsPage } from './pages/LocationsPage';
+import { BlogsPage } from './pages/BlogsPage';
+import { BlogDetailPage } from './pages/BlogDetailPage';
 import OrderModal from "./components/ModalOrder";
 
 export default function App() {
@@ -19,6 +21,10 @@ export default function App() {
           <Route path="/products" element={<ProductsPage />} />
           <Route path="/about" element={<AboutPage />} />
           <Route path="/locations" element={<LocationsPage />} />
+          <Route path="/blogs" element={<BlogsPage />} />
+          <Route path="/blog" element={<BlogsPage />} />
+          <Route path="/blogs/:id" element={<BlogDetailPage />} />
+          <Route path="/blog/:id" element={<BlogDetailPage />} />
         </Routes>
         <OrderModal />
       </div>

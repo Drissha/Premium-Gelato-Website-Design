@@ -3,192 +3,11 @@ import { motion, AnimatePresence } from 'motion/react';
 import { Search, SlidersHorizontal, Star, Plus } from 'lucide-react';
 import { ImageWithFallback } from '../components/figma/ImageWithFallback';
 import { useOrderModal } from "../components/useOrderModal";
+import { getProducts, unwrapList } from "../lib/api";
+import { normalizeProduct, type NormalizedProduct } from "../lib/normalize";
+import { ApiLoadingState } from "../components/ApiLoadingState";
 
-const categories = ['All', 'Gelato', 'Pastry', 'Chocolate'];
 const PRODUCTS_PER_PAGE = 8;
-
-const allProducts = [
-  // Gelato
-  {
-    id: 1,
-    name: 'Strawberry Milkshake',
-    category: 'Gelato',
-    subcategory: 'Milk Based',
-    description: 'Gluten Free, Egg Free',
-    price: '$7.50',
-    rating: 4.9,
-    image: 'https://images.unsplash.com/photo-1571990925439-2b6072445908?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=600',
-    seasonal: false,
-  },
-  {
-    id: 2,
-    name: 'Berry Yogurt',
-    category: 'Gelato',
-    subcategory: 'Milk Based',
-    description: 'Gluten Free',
-    price: '$6.50',
-    rating: 5.0,
-    image: 'https://images.unsplash.com/photo-1602532769069-0e856a643e7d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=600',
-    seasonal: false,
-  },
-  {
-    id: 3,
-    name: 'Unicorn',
-    category: 'Gelato',
-    subcategory: 'Milk Based',
-    description: 'Gluten Free, Egg Free',
-    price: '$6.50',
-    rating: 4.8,
-    image: 'https://images.unsplash.com/photo-1588685232180-8bb64cb4837a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=600',
-    seasonal: false,
-  },
-  {
-    id: 4,
-    name: 'After Eight',
-    category: 'Gelato',
-    subcategory: 'Milk Based',
-    description: 'Gluten Free, Egg Free',
-    price: '$6.00',
-    rating: 4.6,
-    image: 'https://images.unsplash.com/photo-1587653950445-77907aa6bdd7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=600',
-    seasonal: false,
-  },
-  // Sorbet
-  {
-    id: 5,
-    name: 'Tiramisu Klasik',
-    category: 'Gelato',
-    subcategory: 'Milk Based',
-    description: 'Egg Free',
-    price: '$5.50',
-    rating: 4.7,
-    image: 'https://images.unsplash.com/photo-1689001896226-4bacda02550d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=600',
-    seasonal: false,
-  },
-  {
-    id: 6,
-    name: 'Bubble Gum',
-    category: 'Gelato',
-    subcategory: 'Milk Based',
-    description: 'Gluten Free, Egg Free',
-    price: '$6.50',
-    rating: 4.9,
-    image: 'https://images.unsplash.com/photo-1587372681603-5b99f6e49cf9?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=600',
-    seasonal: false,
-  },
-  {
-    id: 7,
-    name: 'Blueberry Cheesecake',
-    category: 'Gelato',
-    subcategory: 'Milk Based',
-    description: 'Egg Free',
-    price: '$5.50',
-    rating: 4.8,
-    image: 'https://images.unsplash.com/photo-1532678465554-94846274c297?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=600',
-    seasonal: false,
-  },
-  // Pastry
-  {
-    id: 8,
-    name: 'Popcorn Caramel',
-    category: 'Gelato',
-    subcategory: 'Milk Based',
-    description: 'Gluten Free, Egg Free',
-    price: '$8.50',
-    rating: 5.0,
-    image: 'https://images.unsplash.com/photo-1769812343875-c40f9ec7f846?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=600',
-    seasonal: false,
-  },
-  {
-    id: 9,
-    name: 'Milky Way',
-    category: 'Gelato',
-    subcategory: 'Milk Based',
-    description: 'Egg Free',
-    price: '$7.00',
-    rating: 4.9,
-    image: 'https://images.unsplash.com/photo-1769812343628-81300c21753c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=600',
-    seasonal: false,
-  },
-  {
-    id: 10,
-    name: 'Biscof',
-    category: 'Gelato',
-    subcategory: 'Milk Based',
-    description: 'Egg Free',
-    price: '$6.50',
-    rating: 4.7,
-    image: 'https://images.unsplash.com/photo-1764380746818-18c01e96df12?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=600',
-    seasonal: false,
-  },
-  // Chocolate
-  {
-    id: 11,
-    name: 'Japanese Matcha',
-    category: 'Gelato',
-    subcategory: 'Milk Based',
-    description: 'Gluten Free, Egg Free',
-    price: '$9.00',
-    rating: 5.0,
-    image: 'https://images.unsplash.com/photo-1772985809496-e2f12a22b1b1?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=600',
-    seasonal: false,
-  },
-  {
-    id: 12,
-    name: 'Sea Salt Caramel',
-    category: 'Gelato',
-    subcategory: 'Milk Based',
-    description: 'Gluten Free, Egg Free',
-    price: '$12.00',
-    rating: 4.8,
-    image: 'https://images.unsplash.com/photo-1772985811111-c90aa569792b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=600',
-    seasonal: false,
-  },
-  {
-    id: 13,
-    name: 'Vanilla Original',
-    category: 'Gelato',
-    subcategory: 'Milk Based',
-    description: 'Gluten Free',
-    price: '$7.50',
-    rating: 4.9,
-    image: 'https://images.unsplash.com/photo-1596962680524-5116314fb8ae?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=600',
-    seasonal: false,
-  },
-  {
-    id: 14,
-    name: 'Vanilla Almond Pralines',
-    category: 'Gelato',
-    subcategory: 'Milk Based',
-    description: 'Gluten Free',
-    price: '$7.00',
-    rating: 5.0,
-    image: 'https://images.unsplash.com/photo-1579954115567-dff2eeb6fdeb?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=600',
-    seasonal: false,
-  },
-  {
-    id: 15,
-    name: 'Biscoff Cheese Cake',
-    category: 'Gelato',
-    subcategory: 'Milk Based',
-    description: 'Egg Free',
-    price: '$7.50',
-    rating: 4.9,
-    image: 'https://images.unsplash.com/photo-1596962680524-5116314fb8ae?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=600',
-    seasonal: false,
-  },
-  {
-    id: 16,
-    name: 'Matcha Brownie',
-    category: 'Gelato',
-    subcategory: 'Milk Based',
-    description: 'Egg Free',
-    price: '$7.00',
-    rating: 5.0,
-    image: 'https://images.unsplash.com/photo-1579954115567-dff2eeb6fdeb?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=600',
-    seasonal: false,
-  },
-];
 
 export function ProductsPage() {
   const [activeCategory, setActiveCategory] = useState('All');
@@ -196,24 +15,83 @@ export function ProductsPage() {
   const [searchQuery, setSearchQuery] = useState('');
   const [sortBy, setSortBy] = useState('popular');
   const [visibleCount, setVisibleCount] = useState(PRODUCTS_PER_PAGE);
+  const [products, setProducts] = useState<NormalizedProduct[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState('');
   const { openModal } = useOrderModal();
+
+  const categories = useMemo(() => {
+    const categoryNames = Array.from(
+      new Set(
+        products
+          .flatMap((product) => (Array.isArray(product.category) ? product.category : [product.category]))
+          .map((category) => category?.trim())
+          .filter((category): category is string => Boolean(category) && category.toLowerCase() !== 'all')
+      )
+    );
+
+    return ['All', ...categoryNames];
+  }, [products]);
+
+  useEffect(() => {
+    let isActive = true;
+    const timer = window.setTimeout(async () => {
+      setLoading(true);
+      setError('');
+
+      try {
+        const response = await getProducts({ perPage: 15, status: 1, search: searchQuery.trim() });
+        const items = unwrapList(response).map((product, index) => normalizeProduct(product, index));
+
+        if (isActive && items.length > 0) {
+          setProducts(items);
+        }
+      } catch (fetchError) {
+        if (isActive) {
+          setError(fetchError instanceof Error ? fetchError.message : 'Failed to load products.');
+          setProducts([]);
+        }
+      } finally {
+        if (isActive) {
+          setLoading(false);
+        }
+      }
+    }, 350);
+
+    return () => {
+      isActive = false;
+      window.clearTimeout(timer);
+    };
+  }, [searchQuery]);
 
   const availableSubCategories = useMemo(() => {
     const productsInCategory =
       activeCategory === 'All'
-        ? allProducts
-        : allProducts.filter((product) =>
+        ? products
+        : products.filter((product) =>
             Array.isArray(product.category)
               ? product.category.includes(activeCategory)
               : product.category === activeCategory
           );
 
     return ['All', ...Array.from(new Set(productsInCategory.map((product) => product.subcategory).filter(Boolean)))];
-  }, [activeCategory]);
+  }, [activeCategory, products]);
+
+  useEffect(() => {
+    if (!categories.includes(activeCategory)) {
+      setActiveCategory('All');
+    }
+  }, [activeCategory, categories]);
+
+  useEffect(() => {
+    if (activeSubCategory !== 'All' && !availableSubCategories.includes(activeSubCategory)) {
+      setActiveSubCategory('All');
+    }
+  }, [activeSubCategory, availableSubCategories]);
 
   // Filter and sort products
   const filteredProducts = useMemo(() => {
-    let filtered = allProducts;
+    let filtered = products;
 
     // Filter by category
     if (activeCategory !== 'All') {
@@ -251,7 +129,7 @@ export function ProductsPage() {
     }
 
     return filtered;
-  }, [activeCategory, activeSubCategory, searchQuery, sortBy]);
+  }, [activeCategory, activeSubCategory, products, sortBy, searchQuery]);
 
   useEffect(() => {
     setVisibleCount(PRODUCTS_PER_PAGE);
@@ -393,7 +271,14 @@ export function ProductsPage() {
           Showing <span className="font-bold text-blue-reguler">{filteredProducts.length}</span> products
         </motion.div>
 
+        {error && (
+          <div className="mb-6 rounded-2xl border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-800">
+            {error}
+          </div>
+        )}
+
         {/* Product Grid */}
+        {!loading && (
         <AnimatePresence mode="wait">
           <motion.div
             key={activeCategory + searchQuery + sortBy}
@@ -479,9 +364,23 @@ export function ProductsPage() {
             ))}
           </motion.div>
         </AnimatePresence>
+        )}
+
+        {loading && (
+          <div className="mb-8">
+            <div className="w-full max-w-7xl">
+              <ApiLoadingState
+                title="Loading products"
+                message="Fetching the latest gelato catalog..."
+                cards={8}
+                lines={0}
+              />
+            </div>
+          </div>
+        )}
 
         {/* No Results */}
-        {filteredProducts.length === 0 && (
+        {!loading && filteredProducts.length === 0 && (
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}

@@ -78,6 +78,13 @@ export function GelatoNavbar() {
               Locations
               <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-pink-200 to-red-200 group-hover:w-full transition-all duration-300" />
             </Link>
+            <Link
+              to="/blogs"
+              className="relative text-gray-700 hover:text-pink-300 transition-all duration-300 font-medium group"
+            >
+              Blog
+              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-pink-200 to-red-200 group-hover:w-full transition-all duration-300" />
+            </Link>
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
@@ -115,6 +122,7 @@ export function GelatoNavbar() {
                   { label: 'Products', to: '/products' },
                   { label: 'About', to: '/about' },
                   { label: 'Locations', to: '/locations' },
+                  { label: 'Blog', to: '/blogs' },
                 ].map((item, idx) => (
                   <motion.div
                     key={item.label}
