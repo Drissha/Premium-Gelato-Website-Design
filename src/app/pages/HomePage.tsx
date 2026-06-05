@@ -668,13 +668,15 @@ export default function App() {
               </div>
 
               {/* button */}
+              <Link to="/about">
               <motion.button
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
-                className={`w-full from-blue-reguler via-pink-reguler to-pink-reguler bg-gradient-to-r text-gray-700 py-4 rounded-2xl font-bold shadow-lg hover:shadow-xl transition-all duration-300 text-sm lg:text-base`}
+                className={`w-full cursor-pointer from-blue-reguler via-pink-reguler to-pink-reguler bg-gradient-to-r text-gray-700 py-4 rounded-2xl font-bold shadow-lg hover:shadow-xl transition-all duration-300 text-sm lg:text-base`}
               >
                 Learn More
               </motion.button>
+              </Link>
 
               {/* Stats Grid */}
               {/* <div className="grid grid-cols-3 gap-6 lg:gap-8">
