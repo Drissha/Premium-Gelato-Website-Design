@@ -168,7 +168,7 @@ export function PremiumCarousel({ items }: PremiumCarouselProps) {
               <ImageWithFallback
                 src={item.image}
                 alt={item.name}
-                className="w-full h-90 object-cover group-hover:scale-110 transition-transform duration-700"
+                className="w-full rounded-[2rem] h-90 object-cover group-hover:scale-110 transition-transform duration-700"
               />
               <div className="absolute inset-0 transition-opacity duration-500" />
 
