@@ -2,10 +2,12 @@ import { useEffect, useMemo, useState } from 'react';
 import { AnimatePresence, motion } from 'motion/react';
 import { Plus, Search, SlidersHorizontal, Star } from 'lucide-react';
 import { ImageWithFallback } from '../components/figma/ImageWithFallback';
+import { CategoryCarousel } from '../components/CategoryCarousel';
 import { useOrderModal } from "../components/useOrderModal";
 import { getProducts, unwrapList } from "../lib/api";
 import { normalizeProduct, type NormalizedProduct } from "../lib/normalize";
 import { ApiLoadingState } from "../components/ApiLoadingState";
+import { BengawanCust, Brownies, Cookie, Cookie2, Cookies, Croissant } from "../imageImports";
 
 const PRODUCTS_PER_PAGE = 8;
 const PASTRY_CATEGORY = 'pastry';
@@ -20,6 +22,33 @@ const isPastryProduct = (product: NormalizedProduct) => {
 
   return categories.some((category) => category.toLowerCase().includes(PASTRY_CATEGORY));
 };
+
+const pastryCarouselSlides = [
+  {
+    id: 1,
+    title: 'Brownies',
+    description: 'Flaky layers, warm aroma, and that fresh-baked bakery feel.',
+    image: Brownies,
+    badge: 'Freshly Baked',
+    accent: 'from-[#5b3b28]/70 via-[#5b3b28]/20 to-transparent',
+  },
+  {
+    id: 2,
+    title: 'Signature Cookies',
+    description: 'Chewy, crisp, and made to pair perfectly with gelato.',
+    image: Cookie,
+    badge: 'Fan Favorite',
+    accent: 'from-[#9a5b3f]/70 via-[#9a5b3f]/20 to-transparent',
+  },
+  {
+    id: 3,
+    title: 'Desert',
+    description: 'A rich pastry pairing for your next gelato treat.',
+    image: Cookie2,
+    badge: 'Special Pick',
+    accent: 'from-[#8c4d44]/70 via-[#8c4d44]/20 to-transparent',
+  },
+] as const;
 
 export function PastryPage() {
   const [searchQuery, setSearchQuery] = useState('');
@@ -125,6 +154,13 @@ export function PastryPage() {
             Freshly baked pastries, buttery layers, and sweet treats made to pair perfectly with gelato
           </p>
         </motion.section>
+
+        <CategoryCarousel
+          eyebrow="Featured Carousel"
+          title="Swipe Through Our Pastry Highlights"
+          description="From buttery layers to sweet bites, here’s a quick preview before you search."
+          slides={pastryCarouselSlides}
+        />
 
         <motion.div
           initial={{ opacity: 0, y: 20 }}

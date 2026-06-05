@@ -2,10 +2,22 @@ import { useEffect, useMemo, useState } from 'react';
 import { AnimatePresence, motion } from 'motion/react';
 import { Plus, Search, SlidersHorizontal, Star } from 'lucide-react';
 import { ImageWithFallback } from '../components/figma/ImageWithFallback';
+import { CategoryCarousel } from '../components/CategoryCarousel';
 import { useOrderModal } from "../components/useOrderModal";
 import { getProducts, unwrapList } from "../lib/api";
 import { normalizeProduct, type NormalizedProduct } from "../lib/normalize";
 import { ApiLoadingState } from "../components/ApiLoadingState";
+import {
+  Blackforest,
+  Blueberry,
+  Bublegum,
+  ChocolateBased,
+  ChocoSorbet,
+  Gelato,
+  MilkBased,
+  NutBased,
+  SorbetBased,
+} from "../imageImports";
 
 const PRODUCTS_PER_PAGE = 8;
 const GELATO_CATEGORY = 'gelato';
@@ -20,6 +32,41 @@ const isGelatoProduct = (product: NormalizedProduct) => {
 
   return categories.some((category) => category.toLowerCase().includes(GELATO_CATEGORY));
 };
+
+const gelatoCarouselSlides = [
+  {
+    id: 1,
+    title: 'Milk Based',
+    description: 'Creamy, smooth, and made for the perfect first spoonful.',
+    image: MilkBased,
+    badge: 'Signature',
+    accent: 'from-black/65 via-black/20 to-transparent',
+  },
+  {
+    id: 2,
+    title: 'Chocolate Based',
+    description: 'A rich chocolate-and-cherry favorite with a premium finish.',
+    image: ChocolateBased,
+    badge: 'Best Seller',
+    accent: 'from-[#3b1f2b]/70 via-[#3b1f2b]/20 to-transparent',
+  },
+  {
+    id: 3,
+    title: 'Nut Based',
+    description: 'Bright berry notes balanced with a silky cheesecake base.',
+    image: NutBased,
+    badge: 'Fresh Pick',
+    accent: 'from-[#FFF9D2]/70 via-[#27496d]/20 to-transparent',
+  },
+  {
+    id: 4,
+    title: 'Sorbet Based',
+    description: 'Playful, colorful, and nostalgic in every scoop.',
+    image: SorbetBased,
+    badge: 'Fun Flavor',
+    accent: 'from-[#d94c91]/70 via-[#d94c91]/20 to-transparent',
+  },
+] as const;
 
 export function GelatoPage() {
   const [searchQuery, setSearchQuery] = useState('');
@@ -125,6 +172,13 @@ export function GelatoPage() {
             Handcrafted gelato made with love, fresh ingredients, and smooth Italian-inspired flavors
           </p>
         </motion.section>
+
+        <CategoryCarousel
+          eyebrow="Featured Carousel"
+          title="Swipe Through Our Gelato Highlights"
+          description="A quick preview of the flavors people come back for most often."
+          slides={gelatoCarouselSlides}
+        />
 
         <motion.div
           initial={{ opacity: 0, y: 20 }}

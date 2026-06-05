@@ -244,7 +244,13 @@ export function LocationsPage() {
                 <span className="rounded-full bg-gradient-to-r from-pink-reguler/25 to-blue-reguler/20 px-3 py-1 text-xs font-semibold text-pink-300">Most loved</span>
               </div>
             <div className="grid gap-6 lg:grid-cols-[1fr_0.9fr] items-center">
-              <img src={featuredStoreImage} alt={featuredStore.name} className="h-64 w-full rounded-[1.5rem] object-cover shadow-xl" />
+              <img
+                src={featuredStoreImage}
+                alt={featuredStore.name}
+                className="h-64 w-full rounded-[1.5rem] object-cover shadow-xl"
+                loading="lazy"
+                decoding="async"
+              />
               <div className="space-y-4 rounded-[1.5rem] bg-gradient-to-br from-pink-reguler/15 to-blue-reguler/15 p-5 shadow-inner">
                 
                 <ul className="space-y-3 text-sm text-gray-700">
@@ -284,7 +290,13 @@ export function LocationsPage() {
               whileHover={{ y: -6, scale: 1.02 }}
               className="rounded-[2rem] bg-white/85 p-5 shadow-2xl shadow-blue-100/60"
             >
-              <img src={store.image || resolveLocationImage(store, index)} alt={store.name} className="h-44 w-full rounded-[1.4rem] object-cover" />
+              <img
+                src={store.image || resolveLocationImage(store, index)}
+                alt={store.name}
+                className="h-44 w-full rounded-[1.4rem] object-cover"
+                loading="lazy"
+                decoding="async"
+              />
               <div className="mt-4 flex items-center justify-between gap-2">
                 <span className="rounded-full bg-pink-reguler/15 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.24em] text-blue-reguler">{store.city}</span>
                 <span className="text-xs text-pink-300">{store.area}</span>

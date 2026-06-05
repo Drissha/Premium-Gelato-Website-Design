@@ -26,5 +26,12 @@ import WA from '../assets/images/wa.png';
 import Tokopedia from '../assets/images/tokped.png';
 import Shopee from '../assets/images/shopee.png';
 import Gojek from '../assets/images/gojek.png';
+import MilkBased from '../assets/images/milk-based.png';
+import ChocolateBased from '../assets/images/chocolate-based.png';
+import NutBased from '../assets/images/nut-based.png';
+import SorbetBased from '../assets/images/sorbet-based.png';
+import Brownies from '../assets/images/brownies.png';
+import Cookie from '../assets/images/cookie.png';
+import Cookie2 from '../assets/images/cookie2.png';
 
-export { Hero, Gelato, Cookies, Choco, Blackforest, Blueberry, Bublegum, ChocoChashew, ChocoSorbet, CoffeeNut , Our, logo, Tsm, Bengawan, Villagio, Cone, Crew, Gelatocup, Cup, Croissant, BengawanCust, Maps, Braga, SMB, WA, Tokopedia, Shopee, Gojek };
+export { Hero, Gelato, Cookies, Choco, Blackforest, Blueberry, Bublegum, ChocoChashew, ChocoSorbet, CoffeeNut , Our, logo, Tsm, Bengawan, Villagio, Cone, Crew, Gelatocup, Cup, Croissant, BengawanCust, Maps, Braga, SMB, WA, Tokopedia, Shopee, Gojek, MilkBased, ChocolateBased, NutBased, SorbetBased, Brownies, Cookie, Cookie2 };

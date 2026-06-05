@@ -413,6 +413,7 @@ export default function App() {
                           src={slide.image}
                           alt={slide.alt}
                           className="w-full h-full object-cover"
+                          loading="eager"
                         />
                       </motion.div>
                     );
@@ -529,6 +530,8 @@ export default function App() {
                     src={category.image}
                     alt={category.title}
                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                    loading="lazy"
+                    decoding="async"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
 
@@ -619,6 +622,8 @@ export default function App() {
                   src={Our}
                   alt="Artisan gelato making"
                   className="w-full h-[550px] lg:h-[700px] object-contain"
+                  loading="lazy"
+                  decoding="async"
                 />
                 <div className="absolute inset-0 bg-transparent" />
               </div>
@@ -741,6 +746,8 @@ export default function App() {
                     src={location.image || resolveLocationImage(location, idx)}
                     alt={location.name}
                     className="w-full h-70 object-cover group-hover:scale-110 transition-transform duration-700"
+                    loading="lazy"
+                    decoding="async"
                   />
                   <motion.div
                     key={location.id}
@@ -817,7 +824,13 @@ export default function App() {
             {/* Brand Column */}
             <div className="lg:col-span-1">
               <div className="flex items-center gap-3 mb-5">
-                <img src={logo} alt="Gelato Logo" className="w-50 h-20 object-contain" />
+                <img
+                  src={logo}
+                  alt="Gelato Logo"
+                  className="w-50 h-20 object-contain"
+                  loading="lazy"
+                  decoding="async"
+                />
               </div>
               <p className="text-gray-400 mb-6 leading-relaxed">
                 Let’s Go Gelato is a well-established chain with 18 stores,
