@@ -346,10 +346,10 @@ export function ProductsPage() {
                   <h3 className="font-bold text-xl mb-2 text-gray-800">{product.name}</h3>
                   <p className="text-gray-600 text-sm mb-4 line-clamp-2">{product.description}</p>
 
-                  <div className="flex items-center justify-between">
-                    <span className="text-2xl font-extrabold bg-gradient-to-r from-pink-300 to-rose-200 bg-clip-text text-transparent">
+                  <div className="text-end">
+                    {/* <span className="text-2xl font-extrabold bg-gradient-to-r from-pink-300 to-rose-200 bg-clip-text text-transparent">
                       {product.price}
-                    </span>
+                    </span> */}
                     <motion.button
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}

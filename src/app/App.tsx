@@ -3,6 +3,8 @@ import { GelatoNavbar } from './components/GelatoNavbar';
 import { ScrollToTop } from './components/ScrollToTop';
 import  HomePage  from './pages/HomePage';
 import { ProductsPage } from './pages/ProductsPage';
+import { GelatoPage } from './pages/GelatoPage';
+import { PastryPage } from './pages/PastryPage';
 import { AboutPage } from './pages/AboutPage';
 import { LocationsPage } from './pages/LocationsPage';
 import { BlogsPage } from './pages/BlogsPage';
@@ -19,6 +21,10 @@ export default function App() {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/products" element={<ProductsPage />} />
+          <Route path="/gelato" element={<GelatoPage />} />
+          <Route path="/products/gelato" element={<GelatoPage />} />
+          <Route path="/pastry" element={<PastryPage />} />
+          <Route path="/products/pastry" element={<PastryPage />} />
           <Route path="/about" element={<AboutPage />} />
           <Route path="/locations" element={<LocationsPage />} />
           <Route path="/blogs" element={<BlogsPage />} />

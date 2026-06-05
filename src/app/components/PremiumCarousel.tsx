@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
-import { ChevronLeft, ChevronRight, Star, Plus } from "lucide-react";
-import { motion, AnimatePresence } from "motion/react";
+import { ChevronLeft, ChevronRight, Star } from "lucide-react";
+import { motion } from "motion/react";
 import { ImageWithFallback } from "./figma/ImageWithFallback";
 import {
   Blackforest,
@@ -10,6 +10,7 @@ import {
   ChocoSorbet,
   CoffeeNut,
 } from "../imageImports";
+import type { NormalizedProduct } from "../lib/normalize";
 // @ts-ignore
 import "../../styles/globals.css";
 
@@ -73,9 +74,39 @@ const bestSellers = [
   },
 ];
 
-export function PremiumCarousel() {
+type PremiumCarouselProps = {
+  items?: NormalizedProduct[];
+};
+
+const fallbackColors = [
+  "from-pink-reguler via-red-200 to-red-200",
+  "from-red-200 via-red-200 to-pink-reguler",
+  "from-pink-reguler via-pink-reguler to-orange-200",
+  "from-yellow-200 via-yellow-200 to-pink-reguler",
+  "from-pink-reguler via-pink-reguler to-red-200",
+  "from-red-200 via-red-200 to-pink-reguler",
+];
+
+export function PremiumCarousel({ items }: PremiumCarouselProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [direction, setDirection] = useState(0);
+
+  const carouselItems =
+    items && items.length > 0
+      ? items.map((item, index) => ({
+          id: item.id,
+          name: item.name,
+          description: item.description,
+          image: item.image,
+          rating: item.rating,
+          color: fallbackColors[index % fallbackColors.length],
+        }))
+      : bestSellers;
+
+  useEffect(() => {
+    setCurrentIndex(0);
+    setDirection(0);
+  }, [carouselItems.length]);
 
   const slideVariants = {
     enter: (direction: number) => ({
@@ -98,28 +129,32 @@ export function PremiumCarousel() {
     setDirection(newDirection);
     setCurrentIndex((prevIndex) => {
       let nextIndex = prevIndex + newDirection;
-      if (nextIndex < 0) nextIndex = bestSellers.length - 1;
-      if (nextIndex >= bestSellers.length) nextIndex = 0;
+      if (nextIndex < 0) nextIndex = carouselItems.length - 1;
+      if (nextIndex >= carouselItems.length) nextIndex = 0;
       return nextIndex;
     });
   };
 
   useEffect(() => {
+    if (carouselItems.length <= 1) {
+      return;
+    }
+
     const timer = setInterval(() => {
       paginate(1);
     }, 5000);
     return () => clearInterval(timer);
-  }, []);
+  }, [carouselItems.length]);
 
   const visibleItems = [
-    bestSellers[currentIndex],
-    bestSellers[(currentIndex + 1) % bestSellers.length],
-    bestSellers[(currentIndex + 2) % bestSellers.length],
+    carouselItems[currentIndex],
+    carouselItems[(currentIndex + 1) % carouselItems.length],
+    carouselItems[(currentIndex + 2) % carouselItems.length],
   ];
 
   return (
     <div className="relative max-w-7xl mx-auto px-6">
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
+      <div className="grid grid-cols-1 h-fit md:grid-cols-3 gap-6 lg:gap-8">
         {visibleItems.map((item, idx) => (
           <motion.div
             key={`${item.id}-${currentIndex}`}
@@ -133,7 +168,7 @@ export function PremiumCarousel() {
               <ImageWithFallback
                 src={item.image}
                 alt={item.name}
-                className="w-full h-90 group-hover:scale-110 transition-transform duration-700"
+                className="w-full h-90 object-cover group-hover:scale-110 transition-transform duration-700"
               />
               <div className="absolute inset-0 transition-opacity duration-500" />
 
@@ -150,7 +185,7 @@ export function PremiumCarousel() {
             </div>
 
             {/* Content */}
-            <div className="p-6 lg:p-7 text-center">
+            <div className="p-6 lg:p-7 flex flex-col items-center text-center">
               <h3 className="font-bold text-xl text-blue-reguler lg:text-2xl mb-2 text-gray-800">
                 {item.name}
               </h3>
@@ -183,7 +218,7 @@ export function PremiumCarousel() {
       </div>
 
       {/* Navigation Controls */}
-      <div className="flex justify-center items-center gap-6 mt-6">
+      <div className="flex justify-center items-center gap-6 mt-0">
         <motion.button
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.9 }}
@@ -198,7 +233,7 @@ export function PremiumCarousel() {
 
         {/* Dots Indicator */}
         <div className="flex gap-2.5">
-          {bestSellers.map((_, idx) => (
+          {carouselItems.map((_, idx) => (
             <button
               key={idx}
               onClick={() => {

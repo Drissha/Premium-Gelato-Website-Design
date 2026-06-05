@@ -48,8 +48,38 @@ const resolveImageUrl = (value: unknown, fallback: string) => {
   }
 
   const origin = new URL(API_BASE_URL).origin;
+  if (text.startsWith("/")) {
+    return `${origin}${text}`;
+  }
+
+  if (text.startsWith("storage/")) {
+    return `${origin}/${text}`;
+  }
+
   const cleaned = text.replace(/^\/+/, "");
   return `${origin}/storage/${cleaned}`;
+};
+
+const resolvePromotionImageUrl = (value: unknown, fallback: string) => {
+  const text = toText(value, "");
+
+  if (!text) {
+    return fallback;
+  }
+
+  if (/^(https?:)?\/\//i.test(text) || text.startsWith("data:") || text.startsWith("blob:")) {
+    return text;
+  }
+
+  const origin = new URL(API_BASE_URL).origin;
+  const cleaned = text.replace(/^\/+/, "");
+  const normalizedPath = cleaned.startsWith("storage/")
+    ? cleaned
+    : cleaned.startsWith("promotions/")
+      ? cleaned
+      : `promotions/${cleaned}`;
+
+  return `${origin}/storage/${normalizedPath}`;
 };
 
 const toNameList = (value: unknown) => {
@@ -71,6 +101,21 @@ const getRelationName = (value: unknown) => {
   if (value && typeof value === "object") {
     const record = value as Record<string, unknown>;
     return toText(record.name ?? record.title ?? record.slug, "");
+  }
+
+  return "";
+};
+
+const firstTextFromArray = (value: unknown) => {
+  if (!Array.isArray(value)) {
+    return "";
+  }
+
+  for (const item of value) {
+    const text = toText(item, "").trim();
+    if (text) {
+      return text;
+    }
   }
 
   return "";
@@ -200,6 +245,13 @@ export interface NormalizedLocation {
   image: string;
 }
 
+export interface NormalizedPromotion {
+  id: string;
+  title: string;
+  image: string;
+  alt: string;
+}
+
 export function normalizeLocation(raw: unknown, index = 0): NormalizedLocation {
   const record = (raw ?? {}) as Record<string, unknown>;
   const name = toText(record.name ?? record.title ?? record.branch_name, `Location ${index + 1}`);
@@ -223,5 +275,46 @@ export function normalizeLocation(raw: unknown, index = 0): NormalizedLocation {
     highlight,
     directionLink,
     image,
+  };
+}
+
+export function normalizePromotion(raw: unknown, index = 0): NormalizedPromotion {
+  const record = (raw ?? {}) as Record<string, unknown>;
+  const title = toText(record.title ?? record.name ?? record.caption ?? record.label, `Promotion ${index + 1}`);
+  const imageSource =
+    firstTextFromArray(record.images) ||
+    (record.image ??
+      record.promo_image ??
+      record.banner_image ??
+      record.file ??
+      record.path ??
+      record.url ??
+      record.image_url ??
+      record.thumbnail ??
+      record.thumbnail_url ??
+      record.cover_image ??
+      record.cover ??
+      record.banner ??
+      record.media_url ??
+      record.hero_image);
+  const image = resolvePromotionImageUrl(
+    imageSource,
+    ""
+  );
+
+  return {
+    id: String(record.id ?? record.slug ?? title.toLowerCase().replace(/\s+/g, "-")),
+    title,
+    image,
+    alt: toText(
+      record.alt ??
+        record.alt_text ??
+        record.image_alt ??
+        record.imageAlt ??
+        record.caption ??
+        record.description ??
+        record.name,
+      title
+    ),
   };
 }

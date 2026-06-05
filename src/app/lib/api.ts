@@ -76,6 +76,32 @@ export function unwrapList<T>(response: ApiListResponse<T> | unknown): T[] {
   return [];
 }
 
+export function unwrapNestedList<T>(response: unknown): T[] {
+  if (!response || typeof response !== "object") {
+    return [];
+  }
+
+  const record = response as Record<string, unknown>;
+  const topLevelData = record.data;
+
+  if (Array.isArray(topLevelData)) {
+    return topLevelData as T[];
+  }
+
+  if (topLevelData && typeof topLevelData === "object") {
+    const nested = topLevelData as Record<string, unknown>;
+    const nestedCandidates = [nested.data, nested.items, nested.results, nested.payload];
+
+    for (const candidate of nestedCandidates) {
+      if (Array.isArray(candidate)) {
+        return candidate as T[];
+      }
+    }
+  }
+
+  return unwrapList<T>(response);
+}
+
 export function unwrapItem<T>(response: ApiItemResponse<T> | unknown): T | null {
   if (!response || typeof response !== "object") {
     return null;
@@ -130,4 +156,8 @@ export async function getBlogById(id: string | number) {
 
 export async function getLocations() {
   return fetchJson<ApiListResponse<unknown>>("/locations");
+}
+
+export async function getPromotions() {
+  return fetchJson<ApiListResponse<unknown>>("/promotions");
 }

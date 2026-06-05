@@ -1,6 +1,7 @@
 import { FloatingGelatoShapes } from "../components/FloatingGelatoShapes";
 import { PremiumCarousel } from "../components/PremiumCarousel";
 import { FloatingIceCreamIcon } from "../components/FloatingIceCreamIcon";
+import { ApiLoadingState } from "../components/ApiLoadingState";
 import { ImageWithFallback } from "../components/figma/ImageWithFallback";
 import {
   IceCream,
@@ -24,12 +25,255 @@ import {
   ChevronDown,
 } from "lucide-react";
 import { motion } from "motion/react";
-import { Hero, Gelato, Cookies, Choco, Our, logo, Bengawan, Tsm, Villagio } from "../imageImports";
+import { useEffect, useMemo, useState } from "react";
+import { getLocations, getProducts, getPromotions, unwrapList, unwrapNestedList } from "../lib/api";
+import { Gelato, Cookies, Choco, Our, logo, Bengawan, Braga, Tsm, Villagio } from "../imageImports";
+import { normalizeLocation, normalizeProduct, normalizePromotion, type NormalizedLocation, type NormalizedProduct, type NormalizedPromotion } from "../lib/normalize";
 // @ts-ignore
 import "../../styles/globals.css";
 import { Link } from "react-router";
 
+const HERO_ROTATION_MS = 4500;
+const PROMOTION_IMAGE_KEYS = [
+  "image",
+  "image_url",
+  "thumbnail",
+  "thumbnail_url",
+  "photo",
+  "cover_image",
+  "cover",
+  "banner",
+  "banner_image",
+  "images",
+  "promo_image",
+  "hero_image",
+  "file",
+  "path",
+  "url",
+];
+
+const buildDirectionLink = (query: string) =>
+  `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(query)}`;
+
+const resolveLocationImage = (store: NormalizedLocation, fallbackIndex = 0) => {
+  const key = `${store.name} ${store.city} ${store.area}`.toLowerCase();
+
+  if (key.includes("bengawan")) return Bengawan;
+  if (key.includes("braga")) return Braga;
+  if (key.includes("smb") || key.includes("summarecon") || key.includes("bekasi")) return Villagio;
+  if (key.includes("villagio") || key.includes("villaggio") || key.includes("karawang")) return Villagio;
+
+  const fallbackImages = [Tsm, Bengawan, Villagio];
+  return fallbackImages[fallbackIndex % fallbackImages.length];
+};
+
+const isRecord = (value: unknown): value is Record<string, unknown> =>
+  Boolean(value) && typeof value === "object" && !Array.isArray(value);
+
+const extractPromotionRecords = (value: unknown, depth = 0, records: Record<string, unknown>[] = []): Record<string, unknown>[] => {
+  if (depth > 4) {
+    return records;
+  }
+
+  if (Array.isArray(value)) {
+    value.forEach((item) => extractPromotionRecords(item, depth + 1, records));
+    return records;
+  }
+
+  if (!isRecord(value)) {
+    return records;
+  }
+
+  const hasImageField = PROMOTION_IMAGE_KEYS.some((key) => {
+    const candidate = value[key];
+    if (typeof candidate === "string") {
+      return candidate.trim().length > 0;
+    }
+
+    if (Array.isArray(candidate)) {
+      return candidate.some((item) => typeof item === "string" && item.trim().length > 0);
+    }
+
+    return false;
+  });
+
+  if (hasImageField) {
+    records.push(value);
+  }
+
+  Object.values(value).forEach((candidate) => {
+    if (Array.isArray(candidate) || isRecord(candidate)) {
+      extractPromotionRecords(candidate, depth + 1, records);
+    }
+  });
+
+  return records;
+};
+
+const dedupePromotionRecords = (records: Record<string, unknown>[]) => {
+  const seen = new Set<string>();
+
+  return records.filter((record) => {
+    const key = String(
+      record.id ??
+      record.slug ??
+      record.image ??
+      record.image_url ??
+      record.banner ??
+      record.banner_image ??
+      record.title ??
+      record.name ??
+      ""
+    );
+
+    if (!key || seen.has(key)) {
+      return false;
+    }
+
+    seen.add(key);
+    return true;
+  });
+};
+
 export default function App() {
+  const [promotionSlides, setPromotionSlides] = useState<NormalizedPromotion[]>([]);
+  const [fanFavoriteProducts, setFanFavoriteProducts] = useState<NormalizedProduct[]>([]);
+  const [homepageLocations, setHomepageLocations] = useState<NormalizedLocation[]>([]);
+  const [loadingPromotions, setLoadingPromotions] = useState(true);
+  const [loadingFanFavorites, setLoadingFanFavorites] = useState(true);
+  const [loadingLocations, setLoadingLocations] = useState(true);
+  const [activeSlideIndex, setActiveSlideIndex] = useState(0);
+
+  useEffect(() => {
+    let isActive = true;
+
+    const loadPromotions = async () => {
+      setLoadingPromotions(true);
+
+      try {
+        const response = await getPromotions();
+        const listItems = unwrapNestedList(response);
+        const directItems = extractPromotionRecords(response);
+        const sourceItems = dedupePromotionRecords(
+          directItems.length > 0
+            ? directItems
+            : listItems.filter(isRecord)
+        );
+        const items = sourceItems.map((promotion, index) => normalizePromotion(promotion, index));
+        const validItems = items.filter((item) => Boolean(item.image));
+
+        if (isActive && validItems.length > 0) {
+          setPromotionSlides(validItems);
+          setActiveSlideIndex(0);
+        }
+      } catch {
+        if (isActive) {
+          setPromotionSlides([]);
+          setActiveSlideIndex(0);
+        }
+      } finally {
+        if (isActive) {
+          setLoadingPromotions(false);
+        }
+      }
+    };
+
+    loadPromotions();
+
+    return () => {
+      isActive = false;
+    };
+  }, []);
+
+  useEffect(() => {
+    let isActive = true;
+
+    const loadLocations = async () => {
+      setLoadingLocations(true);
+
+      try {
+        const response = await getLocations();
+        const items = unwrapList(response)
+          .map((location, index) => normalizeLocation(location, index))
+          .slice(0, 3);
+
+        if (isActive) {
+          setHomepageLocations(items);
+        }
+      } catch {
+        if (isActive) {
+          setHomepageLocations([]);
+        }
+      } finally {
+        if (isActive) {
+          setLoadingLocations(false);
+        }
+      }
+    };
+
+    loadLocations();
+
+    return () => {
+      isActive = false;
+    };
+  }, []);
+
+  useEffect(() => {
+    let isActive = true;
+
+    const loadFanFavorites = async () => {
+      setLoadingFanFavorites(true);
+
+      try {
+        const response = await getProducts({
+          perPage: 20,
+          status: 1,
+          search: "",
+        });
+
+        const items = unwrapList(response)
+          .map((product, index) => normalizeProduct(product, index))
+          .sort((a, b) => b.rating - a.rating)
+          .slice(0, 6);
+
+        if (isActive) {
+          setFanFavoriteProducts(items);
+        }
+      } catch {
+        if (isActive) {
+          setFanFavoriteProducts([]);
+        }
+      } finally {
+        if (isActive) {
+          setLoadingFanFavorites(false);
+        }
+      }
+    };
+
+    loadFanFavorites();
+
+    return () => {
+      isActive = false;
+    };
+  }, []);
+
+  const heroSlides = useMemo(
+    () => promotionSlides,
+    [promotionSlides]
+  );
+
+  useEffect(() => {
+    if (heroSlides.length <= 1) {
+      return;
+    }
+
+    const timer = window.setInterval(() => {
+      setActiveSlideIndex((current) => (current + 1) % heroSlides.length);
+    }, HERO_ROTATION_MS);
+
+    return () => window.clearInterval(timer);
+  }, [heroSlides.length]);
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-cream-50 via-pink-50/30 to-pink-reguler/30">
 
@@ -143,11 +387,40 @@ export default function App() {
           >
             {/* Main Image Card */}
             <div className="relative rounded-[3rem] overflow-hidden shadow-2xl shadow-pink-200/50">
-              <ImageWithFallback
-                src={Hero}
-                alt="Delicious gelato"
-                className="w-full h-[500px] lg:h-[650px] object-cover"
-              />
+              <div className="relative w-full h-[500px] lg:h-[650px]">
+                {loadingPromotions ? (
+                  <div className="absolute inset-0 flex items-center justify-center p-6">
+                    <ApiLoadingState
+                      title="Loading promotions"
+                      message="Fetching hero banners..."
+                      cards={1}
+                      lines={0}
+                    />
+                  </div>
+                ) : heroSlides.length > 0 ? (
+                  heroSlides.map((slide, index) => {
+                    const isActive = index === activeSlideIndex;
+
+                    return (
+                      <motion.div
+                        key={slide.id}
+                        className="absolute inset-0"
+                        initial={{ opacity: 0, scale: 1.02 }}
+                        animate={{ opacity: isActive ? 1 : 0, scale: isActive ? 1 : 1.02 }}
+                        transition={{ duration: 0.8, ease: 'easeInOut' }}
+                      >
+                        <ImageWithFallback
+                          src={slide.image}
+                          alt={slide.alt}
+                          className="w-full h-full object-cover"
+                        />
+                      </motion.div>
+                    );
+                  })
+                ) : (
+                  <div className="absolute inset-0 bg-gradient-to-br from-pink-100/50 via-white/40 to-blue-100/40" />
+                )}
+              </div>
               <div className="absolute inset-0 bg-gradient-to-t from-pink-reguler/10 via-transparent to-pink-200/10" />
             </div>
 
@@ -218,7 +491,7 @@ export default function App() {
           </motion.div>
 
           {/* Category Cards */}
-          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-6 lg:gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-6">
             {[
               {
                 icon: IceCream,
@@ -238,16 +511,8 @@ export default function App() {
                 gradient:
                   "from-pink-200 via-pink-reguler to-rose-200",
                 shadowColor: "shadow-pink-200/50",
-              },
-              {
-                icon: Candy,
-                title: "Dubai Chocolate",
-                description:
-                  "Indulge in the irresistible allure of our Dubai Chocolate, where every bite is a journey to pure bliss. Crafted with the finest cocoa and infused with exotic flavors, it’s a decadent treat that will transport your taste buds to chocolate paradise.",
-                image: Choco,
-                gradient: "from-amber-200 via-orange-200 to-yellow-300",
-                shadowColor: "shadow-amber-200/50",
-              },
+              }
+              
             ].map((category, idx) => (
               <motion.div
                 key={category.title}
@@ -283,11 +548,13 @@ export default function App() {
                   <p className="text-gray-600 mb-5 text-sm lg:text-base">
                     {category.description}
                   </p>
-                  <button
-                    className={`bg-gradient-to-r text-pink-300 bg-clip-text font-bold text-base group-hover:underline transition-all`}
-                  >
-                    Explore Collection →
-                  </button>
+                  <Link to={`/${category.title.toLowerCase()}`}>
+                    <button
+                      className={`bg-gradient-to-r text-pink-300 bg-clip-text font-bold text-base group-hover:underline transition-all`}
+                    >
+                      Explore Collection →
+                    </button>
+                  </Link>
                 </div>
 
                 {/* Decorative Blob */}
@@ -320,7 +587,16 @@ export default function App() {
               Our most loved flavors by gelato enthusiasts worldwide
             </p>
           </motion.div>
-          <PremiumCarousel />
+          {loadingFanFavorites ? (
+            <ApiLoadingState
+              title="Loading fan favorites"
+              message="Fetching the most loved products..."
+              cards={3}
+              lines={0}
+            />
+          ) : (
+            <PremiumCarousel items={fanFavoriteProducts} />
+          )}
         </div>
       </section>
 
@@ -447,99 +723,85 @@ export default function App() {
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 text-start">
-            {[
-              {
-                city: "TSM Cibubur",
-                address:
-                  "Jl. Alternatif Cibubur No.230 A Lantai LG, Harjamukti, Cimanggis, Depok City, West Java 16454",
-                
-
-                image:
-                  Tsm,
-                gradient: "from-blue-reguler via-pink-reguler to-pink-reguler",
-              },
-              {
-                city: "Bengawan | Bandung",
-                address: "Jl Bengawan No 29, Kota Bandung, Jawa Barat",
-                
-
-                image:
-                  Bengawan,
-                gradient: "from-blue-reguler via-pink-reguler to-pink-reguler",
-              },
-              {
-                city: "Villagio | Karawang",
-                address:
-                  "Jl. Bulevar Summarecon Emerald Blk. A No.Kav.1, Kondangjaya, Kec. Karawang Tim., Karawang, Jawa Barat 41371",
-                
-
-                image:
-                  Villagio,
-                gradient: "from-blue-reguler via-pink-reguler to-pink-reguler",
-              },
-            ].map((location, idx) => (
-              <div
-                className="h-full rounded-[2rem] overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-500 relative group"
-                key={location.city}
-              >
-                <ImageWithFallback
-                  src={location.image}
-                  alt={location.city}
-                  className="w-full h-70 object-cover group-hover:scale-110 transition-transform duration-700"
-                />
-                <motion.div
-                  key={location.city}
-                  initial={{ opacity: 0, y: 50 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: idx * 0.1 }}
-                  whileHover={{ y: -8 }}
-                  className="group bg-white/80 backdrop-blur-sm rounded-[2rem] h-[400px] item-center p-8 lg:p-10 shadow-xl hover:shadow-2xl transition-all duration-500 relative overflow-hidden"
+          {loadingLocations ? (
+            <ApiLoadingState
+              title="Loading locations"
+              message="Fetching store addresses and directions..."
+              cards={3}
+              lines={0}
+            />
+          ) : (
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 text-start">
+              {homepageLocations.map((location, idx) => (
+                <div
+                  className="h-fit rounded-[2rem] overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-500 relative group"
+                  key={location.id}
                 >
-                  {/* Icon */}
-                  <div
-                    className={`inline-flex items-center justify-center w-16 h-16 rounded-2xl shadow-2xl  mb-6 shadow-xl`}
-                  >
-                    <MapPin className="text-blue-reguler" size={32} />
-                  </div>
-
-                  <h3 className="text-2xl lg:text-3xl font-extrabold mb-5 text-gray-800">
-                    {location.city}
-                  </h3>
-
-                  <div className="space-y-4 text-gray-600 mb-8">
-                    <p className="text-sm lg:text-base leading-relaxed">
-                      {location.address}
-                    </p>
-                    
-                  </div>
-
-                  <motion.button
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
-                    className={`w-full border-2 border-blue-reguler text-pink-300 py-4 rounded-2xl font-bold shadow-lg hover:shadow-xl transition-all duration-300 text-sm lg:text-base`}
-                  >
-                    Get Directions
-                  </motion.button>
-
-                  {/* Decorative blob */}
-                  <div
-                    className={`absolute -bottom-16 -right-16 w-48 h-48 bg-gradient-to-br ${location.gradient} rounded-full blur-3xl opacity-10 group-hover:opacity-20 transition-opacity duration-500`}
+                  <ImageWithFallback
+                    src={location.image || resolveLocationImage(location, idx)}
+                    alt={location.name}
+                    className="w-full h-70 object-cover group-hover:scale-110 transition-transform duration-700"
                   />
-                </motion.div>
-              </div>
-            ))}
-          </div>
+                  <motion.div
+                    key={location.id}
+                    initial={{ opacity: 0, y: 50 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5, delay: idx * 0.1 }}
+                    whileHover={{ y: -8 }}
+                    className="group bg-white/80 backdrop-blur-sm rounded-[2rem] h-fit flex flex-col justify-center p-8 lg:p-10 shadow-xl hover:shadow-2xl transition-all duration-500 relative overflow-hidden"
+                  >
+                    {/* Icon */}
+                    <div
+                      className={`inline-flex items-center justify-center w-16 h-16 rounded-2xl shadow-2xl  mb-6 shadow-xl`}
+                    >
+                      <MapPin className="text-blue-reguler" size={32} />
+                    </div>
+
+                    <h3 className="text-2xl lg:text-3xl font-extrabold mb-5 text-gray-800">
+                      {location.name}
+                    </h3>
+
+                    <div className="space-y-4 text-gray-600 mb-8">
+                      <p className="text-sm lg:text-base leading-relaxed">
+                        {location.address}
+                      </p>
+                      <p className="text-sm font-semibold text-pink-300">
+                        {location.city}
+                      </p>
+                    </div>
+
+                    <motion.a
+                      href={location.directionLink || buildDirectionLink(`${location.name}, ${location.address}`)}
+                      target="_blank"
+                      rel="noreferrer"
+                      whileHover={{ scale: 1.02 }}
+                      whileTap={{ scale: 0.98 }}
+                      className="inline-flex w-full items-center justify-center rounded-2xl border-2 border-blue-reguler py-4 text-sm font-bold text-pink-300 shadow-lg transition-all duration-300 hover:shadow-xl lg:text-base"
+                    >
+                      Get Directions
+                    </motion.a>
+
+                    {/* Decorative blob */}
+                    <div
+                      className={`absolute -bottom-16 -right-16 w-48 h-48 bg-gradient-to-br from-blue-reguler via-pink-reguler to-pink-reguler rounded-full blur-3xl opacity-10 group-hover:opacity-20 transition-opacity duration-500`}
+                    />
+                  </motion.div>
+                </div>
+              ))}
+            </div>
+          )}
           <motion.div
               whileHover={{ y: -10, x: -5 }}
               whileTap={{ scale: 0.98 }}
               className="inline-block mt-12 text-sm font-semibold text-blue-reguler transition-colors hover:translate-x-1 duration-300"
               >
-                <a href="#" className="flex flex-col items-center gap-1 text-xl font-bold">
-                  View All Locations
-                  <ChevronDown size={30} />
-                </a>
+                <Link to="/locations">
+                  <span className="flex flex-col items-center gap-1 text-xl font-bold">
+                    View All Locations
+                    <ChevronDown size={30} />
+                  </span>
+                </Link>
           </motion.div>
         </div>
       </section>
